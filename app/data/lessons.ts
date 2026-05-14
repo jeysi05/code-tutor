@@ -999,6 +999,97 @@ print(goal)`,
     },
   },
   {
+    id: "python-007",
+    language: "python",
+    order: 7,
+    slug: "ask-for-user-input",
+    title: "Ask for User Input",
+    shortDescription: "Use input() to let the user type an answer.",
+    difficulty: "beginner",
+    estimatedMinutes: 7,
+    xpReward: 30,
+    moduleId: "python-module-2",
+    moduleTitle: "Input and Interaction",
+    moduleOrder: 2,
+    lessonType: "concept",
+    learningGoal:
+      "Learn how input() lets a Python program ask the user for information.",
+    realLifeWhy:
+      "Interactive apps need information from the user. Login forms, search bars, quizzes, calculators, and chatbots all start by asking the user for input.",
+    concept: {
+      explanation:
+        "In Python, input() shows a prompt and waits for the user to type something. The answer can be stored in a variable and reused later.",
+      keyIdea: "input() lets your program listen, not just speak.",
+    },
+    starterCode: {
+      editorLanguage: "python",
+      code: `name = input("What is your name? ")
+print(name)`,
+    },
+    task: {
+      instruction:
+        "Change the input prompt so Python asks for your name in your own words, then print the answer.",
+      successCriteria: [
+        "The code uses input()",
+        "The input answer is stored in a variable named name",
+        "The code prints the name variable",
+        "The prompt is different from What is your name?",
+      ],
+    },
+    hints: [
+      {
+        id: "hint-1",
+        text: "Keep name = input(...) so the answer is stored in the name variable.",
+      },
+      {
+        id: "hint-2",
+        text: "Change the words inside the quotation marks inside input().",
+      },
+      {
+        id: "hint-3",
+        text: 'Example: name = input("Type your first name: ")',
+      },
+    ],
+    check: {
+      mode: "static-rules",
+      rules: [
+        {
+          id: "uses-input",
+          description: "The code should use input().",
+          requiredIncludes: ["input("],
+        },
+        {
+          id: "stores-name",
+          description: "The input should be stored in a variable named name.",
+          requiredIncludes: ["name", "="],
+        },
+        {
+          id: "prints-name",
+          description: "The code should print the name variable.",
+          requiredIncludes: ["print(name)"],
+        },
+        {
+          id: "changed-default-prompt",
+          description: "The default input prompt should be changed.",
+          forbiddenIncludes: ["What is your name?"],
+        },
+      ],
+      aiPromptTemplate: defaultAiPromptTemplate,
+    },
+    success: {
+      message:
+        "Nice! You used input() to make your program ask for information and then print the answer.",
+      nextLessonPrompt:
+        "Next, you’ll use the user’s input inside a friendlier message.",
+    },
+    failure: {
+      encouragement:
+        "You’re close. This lesson is about asking the user for input and storing the answer.",
+      retryPrompt:
+        "Use name = input(...), change the prompt text, then keep print(name).",
+    },
+  },
+  {
     id: "sql-001",
     language: "sql",
     order: 1,
