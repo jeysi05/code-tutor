@@ -1090,6 +1090,110 @@ print(name)`,
     },
   },
   {
+    id: "python-008",
+    language: "python",
+    order: 8,
+    slug: "use-input-in-a-message",
+    title: "Use Input in a Message",
+    shortDescription: "Combine user input with your own text.",
+    difficulty: "beginner",
+    estimatedMinutes: 8,
+    xpReward: 30,
+    moduleId: "python-module-2",
+    moduleTitle: "Input and Interaction",
+    moduleOrder: 2,
+    lessonType: "practice",
+    learningGoal:
+      "Learn how to combine a value from input() with a custom message.",
+    realLifeWhy:
+      "Apps feel more personal when they respond using the user’s information. A greeting, profile screen, chatbot reply, or confirmation message often includes something the user typed.",
+    concept: {
+      explanation:
+        "After input() stores an answer in a variable, you can use that variable inside print(). You can combine text and variables using string concatenation or an f-string.",
+      keyIdea:
+        "User input becomes more useful when your program uses it in a message.",
+    },
+    starterCode: {
+      editorLanguage: "python",
+      code: `name = input("Type your name: ")
+print("Hello, " + name)`,
+    },
+    task: {
+      instruction:
+        "Change the prompt and greeting so Python asks for a name and prints a friendly custom message.",
+      successCriteria: [
+        "The code uses input()",
+        "The answer is stored in a variable named name",
+        "The code uses print()",
+        "The printed message uses the name variable",
+        "The prompt is different from Type your name:",
+        "The greeting is different from Hello,",
+      ],
+    },
+    hints: [
+      {
+        id: "hint-1",
+        text: "Keep name = input(...) so the answer is saved.",
+      },
+      {
+        id: "hint-2",
+        text: 'You can use string concatenation: print("Welcome, " + name).',
+      },
+      {
+        id: "hint-3",
+        text: 'Or you can use an f-string: print(f"Welcome, {name}").',
+      },
+    ],
+    check: {
+      mode: "static-rules",
+      rules: [
+        {
+          id: "uses-input",
+          description: "The code should use input().",
+          requiredIncludes: ["input("],
+        },
+        {
+          id: "stores-name",
+          description: "The input should be stored in a variable named name.",
+          requiredIncludes: ["name", "="],
+        },
+        {
+          id: "uses-print",
+          description: "The code should use print().",
+          requiredIncludes: ["print("],
+        },
+        {
+          id: "uses-name-in-message",
+          description: "The printed message should use the name variable.",
+          requiredIncludes: ["name"],
+        },
+        {
+          id: "changed-default-prompt",
+          description: "The default prompt should be changed.",
+          forbiddenIncludes: ["Type your name:"],
+        },
+        {
+          id: "changed-default-greeting",
+          description: "The default greeting should be changed.",
+          forbiddenIncludes: ["Hello, "],
+        },
+      ],
+      aiPromptTemplate: defaultAiPromptTemplate,
+    },
+    success: {
+      message:
+        "Nice! You made your program respond with a message that uses the user’s input.",
+      nextLessonPrompt:
+        "Next, you’ll collect more than one input and print a short introduction.",
+    },
+    failure: {
+      encouragement:
+        "You’re close. This lesson is about using the user's input inside a friendly message.",
+      retryPrompt:
+        "Use name = input(...), change the prompt, then print a message that includes name.",
+    },
+  },
+  {
     id: "sql-001",
     language: "sql",
     order: 1,
