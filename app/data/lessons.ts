@@ -1321,6 +1321,289 @@ print(f"{name} likes {favorite_food}.")`,
     },
   },
   {
+    id: "python-010",
+    language: "python",
+    order: 10,
+    slug: "convert-text-to-numbers",
+    title: "Convert Text to Numbers",
+    shortDescription: "Use int() to turn input text into a number.",
+    difficulty: "beginner",
+    estimatedMinutes: 9,
+    xpReward: 35,
+    moduleId: "python-module-2",
+    moduleTitle: "Input and Interaction",
+    moduleOrder: 2,
+    lessonType: "concept",
+    learningGoal:
+      "Learn why input() gives text by default and how int() converts it into a number.",
+    realLifeWhy:
+      "Apps often ask users for numbers: age, quantity, budget, score, or price. But user input starts as text, so programs must convert it before doing math.",
+    concept: {
+      explanation:
+        "In Python, input() always gives back text. If the user types 19, Python treats it like the text \"19\". To calculate with it, use int() to convert it into a number.",
+      keyIdea: "Use int() when you need to do math with a number from input().",
+    },
+    starterCode: {
+      editorLanguage: "python",
+      code: `age = input("Enter your age: ")
+next_year = int(age) + 1
+
+print(f"Next year, you will be {next_year}.")`,
+    },
+    task: {
+      instruction:
+        "Change the prompt and final message, then use int() to calculate the user's age next year.",
+      successCriteria: [
+        "The code uses input()",
+        "The answer is stored in a variable named age",
+        "The code uses int(age)",
+        "The code adds 1 to the converted age",
+        "The code stores the result in next_year",
+        "The code prints a sentence using next_year",
+        "The prompt is different from Enter your age:",
+        "The final message is different from Next year, you will be",
+      ],
+    },
+    hints: [
+      {
+        id: "hint-1",
+        text: "input() gives text, even if the user types a number.",
+      },
+      {
+        id: "hint-2",
+        text: "Use int(age) to turn the age text into a number.",
+      },
+      {
+        id: "hint-3",
+        text: "Example: next_year = int(age) + 1",
+      },
+    ],
+    check: {
+      mode: "static-rules",
+      rules: [
+        {
+          id: "uses-input",
+          description: "The code should use input().",
+          requiredIncludes: ["input("],
+        },
+        {
+          id: "stores-age",
+          description: "The input should be stored in a variable named age.",
+          requiredIncludes: ["age", "="],
+        },
+        {
+          id: "uses-int-age",
+          description: "The code should convert age using int(age).",
+          requiredIncludes: ["int(age)"],
+        },
+        {
+          id: "uses-addition",
+          description: "The code should add 1 to the converted age.",
+          requiredIncludes: ["+", "1"],
+        },
+        {
+          id: "stores-next-year",
+          description: "The result should be stored in next_year.",
+          requiredIncludes: ["next_year", "="],
+        },
+        {
+          id: "uses-print",
+          description: "The code should print a result.",
+          requiredIncludes: ["print("],
+        },
+        {
+          id: "uses-next-year-in-message",
+          description: "The printed message should use next_year.",
+          requiredIncludes: ["next_year"],
+        },
+        {
+          id: "changed-default-prompt",
+          description: "The default prompt should be changed.",
+          forbiddenIncludes: ["Enter your age:"],
+        },
+        {
+          id: "changed-default-message",
+          description: "The default final message should be changed.",
+          forbiddenIncludes: ["Next year, you will be"],
+        },
+      ],
+      aiPromptTemplate: defaultAiPromptTemplate,
+    },
+    success: {
+      message:
+        "Nice! You converted input text into a number and used it in a calculation.",
+      nextLessonPrompt:
+        "Next, you’ll combine input and number conversion into a small age calculator.",
+    },
+    failure: {
+      encouragement:
+        "You’re close. This lesson needs input(), int(age), + 1, and a printed message using next_year.",
+      retryPrompt:
+        "Store the input in age, calculate next_year = int(age) + 1, then print a custom sentence using next_year.",
+    },
+  },
+  {
+    id: "python-011",
+    language: "python",
+    order: 11,
+    slug: "age-calculator-mini-project",
+    title: "Age Calculator Mini Project",
+    shortDescription:
+      "Build a tiny interactive age calculator using input(), int(), variables, and print().",
+    difficulty: "beginner",
+    estimatedMinutes: 12,
+    xpReward: 45,
+    moduleId: "python-module-2",
+    moduleTitle: "Input and Interaction",
+    moduleOrder: 2,
+    lessonType: "mini-project",
+    learningGoal:
+      "Combine multiple inputs, number conversion, math, and friendly output into one mini-project.",
+    realLifeWhy:
+      "Real interactive programs often collect information, convert values, calculate results, and show a friendly response. This is the basic pattern behind forms, calculators, quizzes, and dashboards.",
+    concept: {
+      explanation:
+        "A mini-project combines several skills. This time, you will ask for a name and age, convert the age into a number, calculate a result, and print clear messages for the user.",
+      keyIdea:
+        "Interactive programs ask, convert, calculate, and respond.",
+    },
+    starterCode: {
+      editorLanguage: "python",
+      code: `name = input("Enter your name: ")
+age = input("Enter your age: ")
+next_year = int(age) + 1
+
+double_age = int(age) * 2
+
+print(f"Hi {name}!")
+print(f"Next year, you will be {next_year}.")
+print(f"Double your age is {double_age}.")`,
+    },
+    task: {
+      instruction:
+        "Customize the age calculator by changing both prompts and all final messages while keeping the calculation working.",
+      successCriteria: [
+        "The code asks for a name using input()",
+        "The code asks for an age using input()",
+        "The code stores the name in a variable named name",
+        "The code stores the age in a variable named age",
+        "The code uses int(age)",
+        "The code calculates next_year",
+        "The code calculates double_age",
+        "The code prints messages using name, next_year, and double_age",
+        "The starter prompts are changed",
+        "The starter messages are changed",
+      ],
+    },
+    hints: [
+      {
+        id: "hint-1",
+        text: "Keep the two input() lines so your program asks for name and age.",
+      },
+      {
+        id: "hint-2",
+        text: "Use int(age) before doing math with the age input.",
+      },
+      {
+        id: "hint-3",
+        text: "You can customize the messages inside print() without changing the variable names.",
+      },
+    ],
+    check: {
+      mode: "static-rules",
+      rules: [
+        {
+          id: "uses-input",
+          description: "The code should use input().",
+          requiredIncludes: ["input("],
+        },
+        {
+          id: "stores-name",
+          description: "The code should store the user's name.",
+          requiredIncludes: ["name", "="],
+        },
+        {
+          id: "stores-age",
+          description: "The code should store the user's age.",
+          requiredIncludes: ["age", "="],
+        },
+        {
+          id: "uses-int-age",
+          description: "The code should convert age using int(age).",
+          requiredIncludes: ["int(age)"],
+        },
+        {
+          id: "stores-next-year",
+          description: "The code should calculate next_year.",
+          requiredIncludes: ["next_year", "="],
+        },
+        {
+          id: "stores-double-age",
+          description: "The code should calculate double_age.",
+          requiredIncludes: ["double_age", "="],
+        },
+        {
+          id: "uses-print",
+          description: "The code should print output.",
+          requiredIncludes: ["print("],
+        },
+        {
+          id: "uses-name-in-output",
+          description: "The output should use name.",
+          requiredIncludes: ["name"],
+        },
+        {
+          id: "uses-next-year-in-output",
+          description: "The output should use next_year.",
+          requiredIncludes: ["next_year"],
+        },
+        {
+          id: "uses-double-age-in-output",
+          description: "The output should use double_age.",
+          requiredIncludes: ["double_age"],
+        },
+        {
+          id: "changed-name-prompt",
+          description: "The default name prompt should be changed.",
+          forbiddenIncludes: ["Enter your name:"],
+        },
+        {
+          id: "changed-age-prompt",
+          description: "The default age prompt should be changed.",
+          forbiddenIncludes: ["Enter your age:"],
+        },
+        {
+          id: "changed-hi-message",
+          description: "The default greeting should be changed.",
+          forbiddenIncludes: ["Hi {name}!"],
+        },
+        {
+          id: "changed-next-year-message",
+          description: "The default next-year message should be changed.",
+          forbiddenIncludes: ["Next year, you will be"],
+        },
+        {
+          id: "changed-double-age-message",
+          description: "The default double-age message should be changed.",
+          forbiddenIncludes: ["Double your age is"],
+        },
+      ],
+      aiPromptTemplate: defaultAiPromptTemplate,
+    },
+    success: {
+      message:
+        "Module 2 complete! You can now ask for input, use input in messages, collect multiple answers, convert text into numbers, and build a small interactive calculator.",
+      nextLessonPrompt:
+        "Next, we’ll start Module 3 and teach your programs how to make decisions with if statements.",
+    },
+    failure: {
+      encouragement:
+        "You’re close. This mini-project needs name input, age input, int(age), next_year, double_age, and custom printed messages.",
+      retryPrompt:
+        "Change both prompts and final messages, but keep name, age, int(age), next_year, and double_age working.",
+    },
+  },
+  {
     id: "sql-001",
     language: "sql",
     order: 1,

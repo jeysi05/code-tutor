@@ -76,7 +76,7 @@ function parseNumber(value: string) {
 function createStoredVariable(rawValue: string): StoredVariable {
   const cleanedRawValue = removeTrailingSemicolon(rawValue);
   const displayValue = removeQuotes(cleanedRawValue);
-  const numericValue = parseNumber(cleanedRawValue);
+  const numericValue = parseNumber(displayValue);
 
   return {
     rawValue: cleanedRawValue,
@@ -109,13 +109,61 @@ function safelyEvaluateMathExpression(expression: string) {
   }
 }
 
-function replaceNumericVariables(expression: string, variables: VariableMap) {
+function escapeRegExp(value: string) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function replacePythonCasts(expression: string, variables: VariableMap) {
   let replacedExpression = expression;
+
+  Object.entries(variables).forEach(([variableName, variable]) => {
+    const numericValue = parseNumber(variable.displayValue);
+
+    if (numericValue === null) return;
+
+    const escapedVariableName = escapeRegExp(variableName);
+
+    const intPattern = new RegExp(
+      `\\bint\\s*\\(\\s*${escapedVariableName}\\s*\\)`,
+      "g"
+    );
+
+    const floatPattern = new RegExp(
+      `\\bfloat\\s*\\(\\s*${escapedVariableName}\\s*\\)`,
+      "g"
+    );
+
+    replacedExpression = replacedExpression.replace(
+      intPattern,
+      String(Math.trunc(numericValue))
+    );
+
+    replacedExpression = replacedExpression.replace(
+      floatPattern,
+      String(numericValue)
+    );
+  });
+
+  replacedExpression = replacedExpression.replace(
+    /\bint\s*\(\s*["'](-?\d+(\.\d+)?)["']\s*\)/g,
+    (_match, numberText: string) => String(Math.trunc(Number(numberText)))
+  );
+
+  replacedExpression = replacedExpression.replace(
+    /\bfloat\s*\(\s*["'](-?\d+(\.\d+)?)["']\s*\)/g,
+    (_match, numberText: string) => String(Number(numberText))
+  );
+
+  return replacedExpression;
+}
+
+function replaceNumericVariables(expression: string, variables: VariableMap) {
+  let replacedExpression = replacePythonCasts(expression, variables);
 
   Object.entries(variables).forEach(([variableName, variable]) => {
     if (variable.numericValue === null) return;
 
-    const variablePattern = new RegExp(`\\b${variableName}\\b`, "g");
+    const variablePattern = new RegExp(`\\b${escapeRegExp(variableName)}\\b`, "g");
 
     replacedExpression = replacedExpression.replace(
       variablePattern,
@@ -145,6 +193,13 @@ function getDefaultSimulatedPythonInputValue(variableName: string, prompt: strin
   }
 
   if (
+    normalizedVariableName.includes("year") ||
+    normalizedPrompt.includes("year")
+  ) {
+    return "2026";
+  }
+
+  if (
     normalizedVariableName.includes("goal") ||
     normalizedPrompt.includes("goal")
   ) {
@@ -170,6 +225,17 @@ function getDefaultSimulatedPythonInputValue(variableName: string, prompt: strin
     normalizedPrompt.includes("answer")
   ) {
     return "yes";
+  }
+
+  if (
+    normalizedVariableName.includes("price") ||
+    normalizedVariableName.includes("score") ||
+    normalizedVariableName.includes("number") ||
+    normalizedPrompt.includes("price") ||
+    normalizedPrompt.includes("score") ||
+    normalizedPrompt.includes("number")
+  ) {
+    return "10";
   }
 
   return "sample input";
@@ -275,14 +341,20 @@ function splitExpressionByPlus(expression: string) {
 function evaluatePythonFString(expression: string, variables: VariableMap) {
   if (!isFString(expression)) return "";
 
-  let template = removeQuotes(expression);
+  const template = removeQuotes(expression);
 
-  Object.entries(variables).forEach(([variableName, variable]) => {
-    const variablePattern = new RegExp(`\\{\\s*${variableName}\\s*\\}`, "g");
-    template = template.replace(variablePattern, variable.displayValue);
+  return template.replace(/\{([^{}]+)\}/g, (_match, innerExpression) => {
+    const evaluatedExpression = evaluatePythonExpression(
+      innerExpression,
+      variables
+    );
+
+    if (evaluatedExpression.length > 0) {
+      return evaluatedExpression;
+    }
+
+    return `{${innerExpression}}`;
   });
-
-  return template;
 }
 
 function evaluatePythonStringConcat(expression: string, variables: VariableMap) {
@@ -303,6 +375,13 @@ function evaluatePythonStringConcat(expression: string, variables: VariableMap) 
 
     if (directNumber !== null) {
       return String(directNumber);
+    }
+
+    const mathExpression = replaceNumericVariables(part, variables);
+    const mathResult = safelyEvaluateMathExpression(mathExpression);
+
+    if (mathResult !== null) {
+      return mathResult;
     }
 
     return "";
@@ -330,15 +409,6 @@ function evaluatePythonExpression(expression: string, variables: VariableMap) {
     return variables[cleanedExpression].displayValue;
   }
 
-  const stringConcatOutput = evaluatePythonStringConcat(
-    cleanedExpression,
-    variables
-  );
-
-  if (stringConcatOutput.length > 0) {
-    return stringConcatOutput;
-  }
-
   const directNumber = parseNumber(cleanedExpression);
 
   if (directNumber !== null) {
@@ -350,6 +420,15 @@ function evaluatePythonExpression(expression: string, variables: VariableMap) {
 
   if (mathResult !== null) {
     return mathResult;
+  }
+
+  const stringConcatOutput = evaluatePythonStringConcat(
+    cleanedExpression,
+    variables
+  );
+
+  if (stringConcatOutput.length > 0) {
+    return stringConcatOutput;
   }
 
   return "";
@@ -389,7 +468,11 @@ function getPythonOutput(
         return;
       }
 
-      variables[variableName] = createStoredVariable(rawValue);
+      const evaluatedValue = evaluatePythonExpression(rawValue, variables);
+
+      variables[variableName] = createStoredVariable(
+        evaluatedValue.length > 0 ? evaluatedValue : rawValue
+      );
       return;
     }
 
