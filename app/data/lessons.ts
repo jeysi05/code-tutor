@@ -1194,6 +1194,133 @@ print("Hello, " + name)`,
     },
   },
   {
+    id: "python-009",
+    language: "python",
+    order: 9,
+    slug: "store-multiple-inputs",
+    title: "Store Multiple Inputs",
+    shortDescription: "Ask the user for more than one answer.",
+    difficulty: "beginner",
+    estimatedMinutes: 8,
+    xpReward: 30,
+    moduleId: "python-module-2",
+    moduleTitle: "Input and Interaction",
+    moduleOrder: 2,
+    lessonType: "practice",
+    learningGoal:
+      "Learn how to collect multiple pieces of information using input().",
+    realLifeWhy:
+      "Most apps ask for more than one detail. A sign-up form asks for a name and email, a food app asks for an order and address, and a quiz asks several answers.",
+    concept: {
+      explanation:
+        "You can use input() more than once. Each answer should usually be stored in its own variable so your program can use them later.",
+      keyIdea:
+        "Multiple inputs let your program collect multiple details from the user.",
+    },
+    starterCode: {
+      editorLanguage: "python",
+      code: `name = input("Enter your name: ")
+favorite_food = input("Enter your favorite food: ")
+
+print(f"{name} likes {favorite_food}.")`,
+    },
+    task: {
+      instruction:
+        "Ask for two details, then print one complete sentence that uses both answers.",
+      successCriteria: [
+        "The code uses input() at least twice",
+        "The first answer is stored in a variable named name",
+        "The second answer is stored in a variable named favorite_food",
+        "The code uses print()",
+        "The printed sentence uses both name and favorite_food",
+        "The prompts are different from the starter prompts",
+        "The final sentence is different from the starter sentence",
+      ],
+    },
+    hints: [
+      {
+        id: "hint-1",
+        text: "Keep two input() lines: one for name and one for favorite_food.",
+      },
+      {
+        id: "hint-2",
+        text: "Use both variables inside the final print() line.",
+      },
+      {
+        id: "hint-3",
+        text: 'Example: print(f"{name} wants to eat {favorite_food} today.")',
+      },
+    ],
+    check: {
+      mode: "static-rules",
+      rules: [
+        {
+          id: "uses-input",
+          description: "The code should use input().",
+          requiredIncludes: ["input("],
+        },
+        {
+          id: "stores-name",
+          description: "The first input should be stored in name.",
+          requiredIncludes: ["name", "="],
+        },
+        {
+          id: "stores-favorite-food",
+          description: "The second input should be stored in favorite_food.",
+          requiredIncludes: ["favorite_food", "="],
+        },
+        {
+          id: "uses-print",
+          description: "The code should use print().",
+          requiredIncludes: ["print("],
+        },
+        {
+          id: "uses-name-variable",
+          description: "The final sentence should use name.",
+          requiredIncludes: ["name"],
+        },
+        {
+          id: "uses-favorite-food-variable",
+          description: "The final sentence should use favorite_food.",
+          requiredIncludes: ["favorite_food"],
+        },
+        {
+          id: "changed-name-prompt",
+          description: "The first starter prompt should be changed.",
+          forbiddenIncludes: ["Enter your name:"],
+        },
+        {
+          id: "changed-food-prompt",
+          description: "The second starter prompt should be changed.",
+          forbiddenIncludes: ["Enter your favorite food:"],
+        },
+        {
+          id: "changed-starter-sentence-double",
+          description: "The starter sentence should be changed.",
+          forbiddenIncludes: ['f"{name} likes {favorite_food}."'],
+        },
+        {
+          id: "changed-starter-sentence-single",
+          description: "The starter sentence should be changed.",
+          forbiddenIncludes: ["f'{name} likes {favorite_food}.'"],
+        },
+      ],
+      aiPromptTemplate: defaultAiPromptTemplate,
+    },
+    success: {
+      message:
+        "Great work! You collected multiple inputs and used both answers in one sentence.",
+      nextLessonPrompt:
+        "Next, you’ll convert text input into numbers so your programs can calculate user answers.",
+    },
+    failure: {
+      encouragement:
+        "You’re close. This lesson needs two input() lines and a final message that uses both answers.",
+      retryPrompt:
+        "Ask for name and favorite_food, change both prompts, then print a sentence using both variables.",
+    },
+  },
+  {
     id: "sql-001",
     language: "sql",
     order: 1,
