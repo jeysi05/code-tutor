@@ -58,6 +58,7 @@ export default function Home() {
   const [anonymousSessionId, setAnonymousSessionId] = useState("");
   const [draftSaveStatus, setDraftSaveStatus] =
     useState<DraftSaveStatus>("idle");
+  const [expandedModuleIds, setExpandedModuleIds] = useState<string[]>([]);
 
   const selectedGoal = goals.find((goal) => goal.id === selectedGoalId);
   const selectedLanguage = languages.find(
@@ -81,6 +82,8 @@ export default function Home() {
   const selectedLessonCompleted = selectedLesson
     ? completedLessonIds.includes(selectedLesson.id)
     : false;
+
+  const activeModuleId = selectedLesson?.moduleId;
 
   const nextLesson = selectedLesson ? getNextLesson(selectedLesson.id) : undefined;
   const previousLesson = selectedLesson
@@ -138,6 +141,22 @@ export default function Home() {
     return "Concept";
   }
 
+  function isModuleExpanded(moduleId: string) {
+    return expandedModuleIds.includes(moduleId) || activeModuleId === moduleId;
+  }
+
+  function toggleModule(moduleId: string) {
+    setExpandedModuleIds((currentModuleIds) => {
+      if (currentModuleIds.includes(moduleId)) {
+        return currentModuleIds.filter(
+          (currentModuleId) => currentModuleId !== moduleId
+        );
+      }
+
+      return [...currentModuleIds, moduleId];
+    });
+  }
+
   function createAnonymousSessionId() {
     return `anon_${crypto.randomUUID()}`;
   }
@@ -193,6 +212,11 @@ export default function Home() {
     const savedDraft = window.localStorage.getItem(getLessonDraftKey(lesson.id));
 
     setCurrentLessonId(lesson.id);
+    setExpandedModuleIds((currentModuleIds) =>
+      currentModuleIds.includes(lesson.moduleId)
+        ? currentModuleIds
+        : [...currentModuleIds, lesson.moduleId]
+    );
     setUserCode(savedDraft ?? lesson.starterCode.code);
     setFeedback("");
     setDraftSaveStatus("idle");
@@ -285,6 +309,7 @@ export default function Home() {
     setSelectedGoalId(null);
     setSelectedLanguageId(null);
     setCurrentLessonId(null);
+    setExpandedModuleIds([]);
     setUserCode("");
     setFeedback("");
     setDraftSaveStatus("idle");
@@ -436,6 +461,7 @@ export default function Home() {
     setFeedback("");
     setUserCode("");
     setCurrentLessonId(null);
+    setExpandedModuleIds([]);
     setDraftSaveStatus("idle");
     setStep("start");
 
@@ -825,93 +851,131 @@ export default function Home() {
                       </span>
                     </div>
 
-                    <div className="mt-4 space-y-4">
+                    <div className="mt-4 space-y-3">
                       {selectedLanguageModuleGroups.map((moduleGroup) => {
                         const completedInModule = moduleGroup.lessons.filter(
                           (lesson) => completedLessonIds.includes(lesson.id)
                         ).length;
+                        const isExpanded = isModuleExpanded(
+                          moduleGroup.moduleId
+                        );
+                        const isActiveModule =
+                          selectedLesson.moduleId === moduleGroup.moduleId;
+                        const moduleIsCompleted =
+                          completedInModule === moduleGroup.lessons.length;
+                        const moduleHasUnlockedLessons =
+                          moduleGroup.lessons.some((lesson) =>
+                            isLessonUnlocked(lesson)
+                          );
 
                         return (
                           <div
                             key={moduleGroup.moduleId}
-                            className="rounded-2xl border border-white/10 bg-white/[0.03] p-3"
+                            className={`overflow-hidden rounded-2xl border transition ${
+                              isActiveModule
+                                ? "border-blue-300/40 bg-blue-500/[0.08]"
+                                : "border-white/10 bg-white/[0.03]"
+                            }`}
                           >
-                            <div className="mb-3 flex items-center justify-between gap-3">
-                              <div>
-                                <p className="text-sm font-bold text-white">
-                                  Module {moduleGroup.moduleOrder}:{" "}
-                                  {moduleGroup.moduleTitle}
-                                </p>
+                            <button
+                              type="button"
+                              onClick={() => toggleModule(moduleGroup.moduleId)}
+                              className="flex w-full items-center justify-between gap-3 p-3 text-left transition hover:bg-white/[0.04]"
+                            >
+                              <div className="min-w-0">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-sm font-bold text-white">
+                                    {isExpanded ? "▾" : "▸"}
+                                  </span>
+
+                                  <p className="truncate text-sm font-bold text-white">
+                                    Module {moduleGroup.moduleOrder}:{" "}
+                                    {moduleGroup.moduleTitle}
+                                  </p>
+                                </div>
+
                                 <p className="mt-1 text-xs text-white/45">
                                   {completedInModule}/
                                   {moduleGroup.lessons.length} lessons complete
                                 </p>
                               </div>
 
-                              <span className="rounded-full bg-blue-400/10 px-3 py-1 text-[11px] font-semibold text-blue-200">
-                                Module
+                              <span
+                                className={`shrink-0 rounded-full px-3 py-1 text-[11px] font-semibold ${
+                                  moduleIsCompleted
+                                    ? "bg-emerald-400/10 text-emerald-200"
+                                    : moduleHasUnlockedLessons
+                                      ? "bg-blue-400/10 text-blue-200"
+                                      : "bg-white/5 text-white/45"
+                                }`}
+                              >
+                                {moduleIsCompleted
+                                  ? "Complete"
+                                  : moduleHasUnlockedLessons
+                                    ? "Available"
+                                    : "Locked"}
                               </span>
-                            </div>
+                            </button>
 
-                            <div className="grid gap-2">
-                              {moduleGroup.lessons.map((lesson) => {
-                                const isActiveLesson =
-                                  selectedLesson.id === lesson.id;
-                                const isCompleted = completedLessonIds.includes(
-                                  lesson.id
-                                );
-                                const isUnlocked = isLessonUnlocked(lesson);
+                            {isExpanded && (
+                              <div className="grid gap-2 border-t border-white/10 p-3 pt-3">
+                                {moduleGroup.lessons.map((lesson) => {
+                                  const isActiveLesson =
+                                    selectedLesson.id === lesson.id;
+                                  const isCompleted =
+                                    completedLessonIds.includes(lesson.id);
+                                  const isUnlocked = isLessonUnlocked(lesson);
 
-                                return (
-                                  <button
-                                    key={lesson.id}
-                                    onClick={() => loadLesson(lesson)}
-                                    disabled={!isUnlocked}
-                                    className={`rounded-2xl border p-3 text-left transition ${
-                                      isActiveLesson
-                                        ? "border-blue-300/60 bg-blue-500/20"
-                                        : isUnlocked
-                                          ? "border-white/10 bg-white/[0.04] hover:bg-white/[0.08]"
-                                          : "cursor-not-allowed border-white/5 bg-white/[0.02] opacity-45"
-                                    }`}
-                                  >
-                                    <div className="flex items-center justify-between gap-3">
-                                      <div>
-                                        <p className="text-sm font-semibold">
-                                          Lesson {lesson.order}: {lesson.title}
-                                        </p>
-                                        <p className="mt-1 text-xs text-white/45">
-                                          {getLessonTypeLabel(lesson)} ·{" "}
-                                          {lesson.estimatedMinutes} min · +
-                                          {lesson.xpReward} XP
-                                        </p>
-                                      </div>
-
-                                      <span
-                                        className={`shrink-0 rounded-full px-2 py-1 text-[11px] font-semibold ${
-                                          isCompleted
-                                            ? "bg-emerald-400/10 text-emerald-200"
-                                            : isUnlocked
-                                              ? "bg-blue-400/10 text-blue-200"
-                                              : "bg-white/5 text-white/45"
-                                        }`}
-                                      >
-                                        {isCompleted
-                                          ? "Done"
+                                  return (
+                                    <button
+                                      key={lesson.id}
+                                      onClick={() => loadLesson(lesson)}
+                                      disabled={!isUnlocked}
+                                      className={`rounded-2xl border p-3 text-left transition ${
+                                        isActiveLesson
+                                          ? "border-blue-300/60 bg-blue-500/20"
                                           : isUnlocked
-                                            ? "Open"
-                                            : "Locked"}
-                                      </span>
-                                    </div>
-                                  </button>
-                                );
-                              })}
-                            </div>
+                                            ? "border-white/10 bg-white/[0.04] hover:bg-white/[0.08]"
+                                            : "cursor-not-allowed border-white/5 bg-white/[0.02] opacity-45"
+                                      }`}
+                                    >
+                                      <div className="flex items-center justify-between gap-3">
+                                        <div>
+                                          <p className="text-sm font-semibold">
+                                            Lesson {lesson.order}: {lesson.title}
+                                          </p>
+                                          <p className="mt-1 text-xs text-white/45">
+                                            {getLessonTypeLabel(lesson)} ·{" "}
+                                            {lesson.estimatedMinutes} min · +
+                                            {lesson.xpReward} XP
+                                          </p>
+                                        </div>
+
+                                        <span
+                                          className={`shrink-0 rounded-full px-2 py-1 text-[11px] font-semibold ${
+                                            isCompleted
+                                              ? "bg-emerald-400/10 text-emerald-200"
+                                              : isUnlocked
+                                                ? "bg-blue-400/10 text-blue-200"
+                                                : "bg-white/5 text-white/45"
+                                          }`}
+                                        >
+                                          {isCompleted
+                                            ? "Done"
+                                            : isUnlocked
+                                              ? "Open"
+                                              : "Locked"}
+                                        </span>
+                                      </div>
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            )}
                           </div>
                         );
                       })}
-                    </div>
-                  </div>
+                    </div>                  </div>
 
                   <div className="mt-4 flex items-start justify-between gap-4">
                     <div>
