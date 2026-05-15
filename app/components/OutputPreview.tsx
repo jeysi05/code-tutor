@@ -666,6 +666,95 @@ function executePythonStatement(
   }
 }
 
+function getPythonRangeValues(rangeExpression: string, variables: VariableMap) {
+  const rangeMatch = rangeExpression.match(/^range\s*\((.*)\)\s*$/);
+
+  if (!rangeMatch) return null;
+
+  const rawArguments = rangeMatch[1]
+    .split(",")
+    .map((argument) => argument.trim())
+    .filter((argument) => argument.length > 0);
+
+  if (rawArguments.length === 0 || rawArguments.length > 3) {
+    return null;
+  }
+
+  const evaluatedArguments = rawArguments.map((argument) => {
+    const evaluatedArgument = evaluatePythonExpression(argument, variables);
+    const numericArgument = parseNumber(evaluatedArgument);
+
+    return numericArgument;
+  });
+
+  if (evaluatedArguments.some((argument) => argument === null)) {
+    return null;
+  }
+
+  let start = 0;
+  let stop = 0;
+  let step = 1;
+
+  if (evaluatedArguments.length === 1) {
+    stop = evaluatedArguments[0] ?? 0;
+  }
+
+  if (evaluatedArguments.length === 2) {
+    start = evaluatedArguments[0] ?? 0;
+    stop = evaluatedArguments[1] ?? 0;
+  }
+
+  if (evaluatedArguments.length === 3) {
+    start = evaluatedArguments[0] ?? 0;
+    stop = evaluatedArguments[1] ?? 0;
+    step = evaluatedArguments[2] ?? 1;
+  }
+
+  if (step === 0) return null;
+
+  const values: string[] = [];
+  let currentValue = start;
+  let safetyCounter = 0;
+
+  if (step > 0) {
+    while (currentValue < stop && safetyCounter < 50) {
+      values.push(String(currentValue));
+      currentValue += step;
+      safetyCounter += 1;
+    }
+  } else {
+    while (currentValue > stop && safetyCounter < 50) {
+      values.push(String(currentValue));
+      currentValue += step;
+      safetyCounter += 1;
+    }
+  }
+
+  return values;
+}
+
+function getPythonIterableValues(
+  iterableExpression: string,
+  variables: VariableMap
+) {
+  const cleanedIterableExpression = iterableExpression.trim();
+  const rangeValues = getPythonRangeValues(cleanedIterableExpression, variables);
+
+  if (rangeValues !== null) {
+    return rangeValues;
+  }
+
+  if (isQuotedText(cleanedIterableExpression)) {
+    return removeQuotes(cleanedIterableExpression).split("");
+  }
+
+  if (variables[cleanedIterableExpression] !== undefined) {
+    return variables[cleanedIterableExpression].displayValue.split("");
+  }
+
+  return [];
+}
+
 function executePythonLines(
   lines: PythonRuntimeLine[],
   variables: VariableMap,
@@ -678,6 +767,10 @@ function executePythonLines(
   while (index < lines.length) {
     const currentLine = lines[index];
     const ifMatch = currentLine.text.match(/^if\s+(.+):$/);
+    const whileMatch = currentLine.text.match(/^while\s+(.+):$/);
+    const forMatch = currentLine.text.match(
+      /^for\s+([a-zA-Z_][a-zA-Z0-9_]*)\s+in\s+(.+):$/
+    );
 
     if (ifMatch) {
       const parentIndent = currentLine.indent;
@@ -714,6 +807,70 @@ function executePythonLines(
       );
 
       index = elseBlockEnd;
+      continue;
+    }
+
+    if (whileMatch) {
+      const parentIndent = currentLine.indent;
+      const whileBlockStart = index + 1;
+      const whileBlockEnd = findPythonBlockEnd(
+        lines,
+        whileBlockStart,
+        parentIndent
+      );
+      const whileBlock = lines.slice(whileBlockStart, whileBlockEnd);
+      let safetyCounter = 0;
+
+      while (
+        evaluatePythonCondition(whileMatch[1], variables) &&
+        safetyCounter < 50
+      ) {
+        executePythonLines(
+          whileBlock,
+          variables,
+          outputLines,
+          simulatedInputValues,
+          state
+        );
+
+        safetyCounter += 1;
+      }
+
+      if (safetyCounter >= 50) {
+        outputLines.push(
+          "Loop stopped after 50 repeats to prevent an infinite loop."
+        );
+      }
+
+      index = whileBlockEnd;
+      continue;
+    }
+
+    if (forMatch) {
+      const loopVariableName = forMatch[1];
+      const iterableExpression = forMatch[2];
+      const parentIndent = currentLine.indent;
+      const forBlockStart = index + 1;
+      const forBlockEnd = findPythonBlockEnd(lines, forBlockStart, parentIndent);
+      const forBlock = lines.slice(forBlockStart, forBlockEnd);
+      const iterableValues = getPythonIterableValues(
+        iterableExpression,
+        variables
+      );
+
+      iterableValues.forEach((iterableValue) => {
+        variables[loopVariableName] = createStoredVariable(iterableValue);
+
+        executePythonLines(
+          forBlock,
+          variables,
+          outputLines,
+          simulatedInputValues,
+          state
+        );
+      });
+
+      index = forBlockEnd;
       continue;
     }
 
