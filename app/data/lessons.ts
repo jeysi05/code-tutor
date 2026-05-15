@@ -1604,6 +1604,692 @@ print(f"Double your age is {double_age}.")`,
     },
   },
   {
+    id: "python-012",
+    language: "python",
+    order: 12,
+    slug: "your-first-if-statement",
+    title: "Your First If Statement",
+    shortDescription: "Use if to make Python run code only when something is true.",
+    difficulty: "beginner",
+    estimatedMinutes: 8,
+    xpReward: 35,
+    moduleId: "python-module-3",
+    moduleTitle: "Decisions",
+    moduleOrder: 3,
+    lessonType: "concept",
+    learningGoal:
+      "Learn how an if statement lets a Python program make a simple decision.",
+    realLifeWhy:
+      "Programs make decisions all the time: showing a warning, unlocking a feature, checking an answer, or deciding what message to show next.",
+    concept: {
+      explanation:
+        "An if statement checks a condition. If the condition is true, Python runs the indented code below it. If the condition is false, Python skips that block.",
+      keyIdea: "if lets your program choose whether to run a block of code.",
+    },
+    starterCode: {
+      editorLanguage: "python",
+      code: `is_ready = "yes"
+
+if is_ready == "yes":
+    print("Let's start learning!")`,
+    },
+    task: {
+      instruction:
+        "Change the value, condition, and message while keeping the if statement working.",
+      successCriteria: [
+        "The code uses an if statement",
+        "The code uses == to compare values",
+        "The code prints a message only inside the if block",
+        "The starter value is changed",
+        "The starter message is changed",
+      ],
+    },
+    hints: [
+      {
+        id: "hint-1",
+        text: "Keep the colon after the if condition.",
+      },
+      {
+        id: "hint-2",
+        text: "The print line must stay indented under the if statement.",
+      },
+      {
+        id: "hint-3",
+        text: 'Example: if mood == "happy": print("Keep going!")',
+      },
+    ],
+    check: {
+      mode: "static-rules",
+      rules: [
+        {
+          id: "uses-if",
+          description: "The code should use an if statement.",
+          requiredIncludes: ["if ", ":"],
+        },
+        {
+          id: "uses-equality",
+          description: "The code should compare values using ==.",
+          requiredIncludes: ["=="],
+        },
+        {
+          id: "uses-print",
+          description: "The code should print a message.",
+          requiredIncludes: ["print("],
+        },
+        {
+          id: "changed-default-value",
+          description: "The starter value should be changed.",
+          forbiddenIncludes: ['is_ready = "yes"', "is_ready = 'yes'"],
+        },
+        {
+          id: "changed-default-message",
+          description: "The starter message should be changed.",
+          forbiddenIncludes: ["Let's start learning!"],
+        },
+      ],
+      aiPromptTemplate: defaultAiPromptTemplate,
+    },
+    success: {
+      message:
+        "Nice! You used if to make Python run code only when a condition is true.",
+      nextLessonPrompt:
+        "Next, you’ll add else so your program can respond when the condition is false.",
+    },
+    failure: {
+      encouragement:
+        "You’re close. This lesson needs an if statement, a comparison, and an indented print message.",
+      retryPrompt:
+        "Use if, include ==, keep the colon, and indent the print line under the if statement.",
+    },
+  },
+  {
+    id: "python-013",
+    language: "python",
+    order: 13,
+    slug: "else-statements",
+    title: "Else Statements",
+    shortDescription: "Use else to handle the other outcome.",
+    difficulty: "beginner",
+    estimatedMinutes: 8,
+    xpReward: 35,
+    moduleId: "python-module-3",
+    moduleTitle: "Decisions",
+    moduleOrder: 3,
+    lessonType: "concept",
+    learningGoal:
+      "Learn how else gives your program a second path when an if condition is false.",
+    realLifeWhy:
+      "Good apps do not only handle the happy path. They also respond when something is missing, incorrect, unavailable, or not allowed.",
+    concept: {
+      explanation:
+        "else runs when the if condition is false. Together, if and else let your program choose between two possible paths.",
+      keyIdea: "if handles true. else handles false.",
+    },
+    starterCode: {
+      editorLanguage: "python",
+      code: `score = 60
+
+if score >= 75:
+    print("You passed!")
+else:
+    print("Try again.")`,
+    },
+    task: {
+      instruction:
+        "Change the score and both messages while keeping the if/else decision working.",
+      successCriteria: [
+        "The code uses if",
+        "The code uses else",
+        "The condition uses >=",
+        "The code has one message for passing",
+        "The code has one message for not passing",
+        "The starter score and messages are changed",
+      ],
+    },
+    hints: [
+      {
+        id: "hint-1",
+        text: "The else line should line up with the if line.",
+      },
+      {
+        id: "hint-2",
+        text: "The print lines should be indented under if and else.",
+      },
+      {
+        id: "hint-3",
+        text: "Try changing score to a number above 75 and watch the output change.",
+      },
+    ],
+    check: {
+      mode: "static-rules",
+      rules: [
+        {
+          id: "uses-if",
+          description: "The code should use if.",
+          requiredIncludes: ["if "],
+        },
+        {
+          id: "uses-else",
+          description: "The code should use else.",
+          requiredIncludes: ["else:"],
+        },
+        {
+          id: "uses-greater-equal",
+          description: "The condition should use >=.",
+          requiredIncludes: [">="],
+        },
+        {
+          id: "uses-print",
+          description: "The code should print messages.",
+          requiredIncludes: ["print("],
+        },
+        {
+          id: "changed-score",
+          description: "The starter score should be changed.",
+          forbiddenIncludes: ["score = 60"],
+        },
+        {
+          id: "changed-pass-message",
+          description: "The starter pass message should be changed.",
+          forbiddenIncludes: ["You passed!"],
+        },
+        {
+          id: "changed-fail-message",
+          description: "The starter else message should be changed.",
+          forbiddenIncludes: ["Try again."],
+        },
+      ],
+      aiPromptTemplate: defaultAiPromptTemplate,
+    },
+    success: {
+      message:
+        "Great! You used if and else to handle two different outcomes.",
+      nextLessonPrompt:
+        "Next, you’ll practice equality checks with comparison operators.",
+    },
+    failure: {
+      encouragement:
+        "Almost. This lesson needs both if and else, with different messages for each path.",
+      retryPrompt:
+        "Keep if, else, >=, and two indented print messages. Then change the starter score and messages.",
+    },
+  },
+  {
+    id: "python-014",
+    language: "python",
+    order: 14,
+    slug: "comparison-operators",
+    title: "Comparison Operators",
+    shortDescription: "Use == and != to compare values.",
+    difficulty: "beginner",
+    estimatedMinutes: 8,
+    xpReward: 35,
+    moduleId: "python-module-3",
+    moduleTitle: "Decisions",
+    moduleOrder: 3,
+    lessonType: "practice",
+    learningGoal:
+      "Learn how comparison operators help Python check whether values match or do not match.",
+    realLifeWhy:
+      "Programs compare values constantly: checking passwords, quiz answers, selected options, search filters, and status labels.",
+    concept: {
+      explanation:
+        "Comparison operators ask questions. == checks if two values are equal. != checks if two values are not equal.",
+      keyIdea: "Comparisons turn values into true-or-false decisions.",
+    },
+    starterCode: {
+      editorLanguage: "python",
+      code: `answer = "python"
+
+if answer == "python":
+    print("Correct answer!")
+else:
+    print("Not quite.")`,
+    },
+    task: {
+      instruction:
+        "Create your own answer check by changing the answer value, comparison value, and both messages.",
+      successCriteria: [
+        "The code stores an answer variable",
+        "The code uses if and else",
+        "The code uses == or !=",
+        "The code prints different messages for each outcome",
+        "The starter answer and messages are changed",
+      ],
+    },
+    hints: [
+      {
+        id: "hint-1",
+        text: "Use == when you want to check if two values match.",
+      },
+      {
+        id: "hint-2",
+        text: "Use != when you want to check if two values are different.",
+      },
+      {
+        id: "hint-3",
+        text: 'Example: if answer == "blue": print("That matches!")',
+      },
+    ],
+    check: {
+      mode: "static-rules",
+      rules: [
+        {
+          id: "has-answer-variable",
+          description: "The code should store an answer variable.",
+          requiredIncludes: ["answer", "="],
+        },
+        {
+          id: "uses-if",
+          description: "The code should use if.",
+          requiredIncludes: ["if "],
+        },
+        {
+          id: "uses-else",
+          description: "The code should use else.",
+          requiredIncludes: ["else:"],
+        },
+        {
+          id: "uses-print",
+          description: "The code should print messages.",
+          requiredIncludes: ["print("],
+        },
+        {
+          id: "changed-answer",
+          description: "The starter answer should be changed.",
+          forbiddenIncludes: ['answer = "python"', "answer = 'python'"],
+        },
+        {
+          id: "changed-correct-message",
+          description: "The starter correct message should be changed.",
+          forbiddenIncludes: ["Correct answer!"],
+        },
+        {
+          id: "changed-wrong-message",
+          description: "The starter else message should be changed.",
+          forbiddenIncludes: ["Not quite."],
+        },
+      ],
+      aiPromptTemplate: defaultAiPromptTemplate,
+    },
+    success: {
+      message:
+        "Nice! You used a comparison to make Python check an answer.",
+      nextLessonPrompt:
+        "Next, you’ll compare numbers using greater than and less than.",
+    },
+    failure: {
+      encouragement:
+        "You’re close. This lesson needs an answer variable, an if/else decision, and custom messages.",
+      retryPrompt:
+        "Change the answer value, use if with == or !=, keep else, and update both messages.",
+    },
+  },
+  {
+    id: "python-015",
+    language: "python",
+    order: 15,
+    slug: "greater-than-less-than",
+    title: "Greater Than and Less Than",
+    shortDescription: "Compare numbers with >, <, >=, and <=.",
+    difficulty: "beginner",
+    estimatedMinutes: 8,
+    xpReward: 35,
+    moduleId: "python-module-3",
+    moduleTitle: "Decisions",
+    moduleOrder: 3,
+    lessonType: "practice",
+    learningGoal:
+      "Learn how Python compares numbers using greater than and less than operators.",
+    realLifeWhy:
+      "Many programs depend on number checks: age limits, grade cutoffs, stock levels, temperature warnings, and budget alerts.",
+    concept: {
+      explanation:
+        "Use > for greater than, < for less than, >= for greater than or equal to, and <= for less than or equal to.",
+      keyIdea: "Number comparisons let programs react to ranges and limits.",
+    },
+    starterCode: {
+      editorLanguage: "python",
+      code: `temperature = 30
+
+if temperature > 25:
+    print("It is hot today.")
+else:
+    print("It is not too hot.")`,
+    },
+    task: {
+      instruction:
+        "Change the number, comparison, and messages to create your own number-based decision.",
+      successCriteria: [
+        "The code stores a number in a variable",
+        "The code uses if and else",
+        "The condition uses a number comparison like >, <, >=, or <=",
+        "The code prints different messages for each outcome",
+        "The starter number and messages are changed",
+      ],
+    },
+    hints: [
+      {
+        id: "hint-1",
+        text: "Try changing temperature to score, age, points, or budget.",
+      },
+      {
+        id: "hint-2",
+        text: "Use >= when the cutoff value should count too.",
+      },
+      {
+        id: "hint-3",
+        text: "Example: if points >= 100: print('Level unlocked!')",
+      },
+    ],
+    check: {
+      mode: "static-rules",
+      rules: [
+        {
+          id: "uses-if",
+          description: "The code should use if.",
+          requiredIncludes: ["if "],
+        },
+        {
+          id: "uses-else",
+          description: "The code should use else.",
+          requiredIncludes: ["else:"],
+        },
+        {
+          id: "uses-print",
+          description: "The code should print messages.",
+          requiredIncludes: ["print("],
+        },
+        {
+          id: "changed-temperature",
+          description: "The starter number should be changed.",
+          forbiddenIncludes: ["temperature = 30"],
+        },
+        {
+          id: "changed-hot-message",
+          description: "The starter first message should be changed.",
+          forbiddenIncludes: ["It is hot today."],
+        },
+        {
+          id: "changed-cool-message",
+          description: "The starter second message should be changed.",
+          forbiddenIncludes: ["It is not too hot."],
+        },
+      ],
+      aiPromptTemplate: defaultAiPromptTemplate,
+    },
+    success: {
+      message:
+        "Great! You used number comparisons to make your program respond to a cutoff.",
+      nextLessonPrompt:
+        "Next, you’ll combine conditions using and and or.",
+    },
+    failure: {
+      encouragement:
+        "Almost. This lesson needs a number variable, an if/else decision, and custom messages.",
+      retryPrompt:
+        "Change the starter number and messages, then use a comparison like >, <, >=, or <=.",
+    },
+  },
+  {
+    id: "python-016",
+    language: "python",
+    order: 16,
+    slug: "multiple-conditions",
+    title: "Multiple Conditions",
+    shortDescription: "Use and/or to check more than one condition.",
+    difficulty: "beginner",
+    estimatedMinutes: 9,
+    xpReward: 40,
+    moduleId: "python-module-3",
+    moduleTitle: "Decisions",
+    moduleOrder: 3,
+    lessonType: "practice",
+    learningGoal:
+      "Learn how and and or let Python check multiple conditions in one decision.",
+    realLifeWhy:
+      "Real decisions often need more than one rule. Apps check age and ID, username and password, stock and payment, or schedule and availability.",
+    concept: {
+      explanation:
+        "and means both conditions must be true. or means at least one condition must be true.",
+      keyIdea: "Multiple conditions let programs make more realistic decisions.",
+    },
+    starterCode: {
+      editorLanguage: "python",
+      code: `age = 20
+has_id = "yes"
+
+if age >= 18 and has_id == "yes":
+    print("You can enter.")
+else:
+    print("You cannot enter yet.")`,
+    },
+    task: {
+      instruction:
+        "Create your own decision that checks two conditions using and or or.",
+      successCriteria: [
+        "The code stores at least two values in variables",
+        "The code uses if and else",
+        "The condition uses and or or",
+        "The code prints different messages for each outcome",
+        "The starter values and messages are changed",
+      ],
+    },
+    hints: [
+      {
+        id: "hint-1",
+        text: "Use and when both conditions must be true.",
+      },
+      {
+        id: "hint-2",
+        text: "Use or when only one condition needs to be true.",
+      },
+      {
+        id: "hint-3",
+        text: 'Example: if points >= 100 or badge == "yes": print("Reward unlocked!")',
+      },
+    ],
+    check: {
+      mode: "static-rules",
+      rules: [
+        {
+          id: "uses-if",
+          description: "The code should use if.",
+          requiredIncludes: ["if "],
+        },
+        {
+          id: "uses-else",
+          description: "The code should use else.",
+          requiredIncludes: ["else:"],
+        },
+        {
+          id: "uses-print",
+          description: "The code should print messages.",
+          requiredIncludes: ["print("],
+        },
+        {
+          id: "changed-age",
+          description: "The starter age should be changed.",
+          forbiddenIncludes: ["age = 20"],
+        },
+        {
+          id: "changed-id",
+          description: "The starter ID value should be changed.",
+          forbiddenIncludes: ['has_id = "yes"', "has_id = 'yes'"],
+        },
+        {
+          id: "changed-enter-message",
+          description: "The starter first message should be changed.",
+          forbiddenIncludes: ["You can enter."],
+        },
+        {
+          id: "changed-blocked-message",
+          description: "The starter second message should be changed.",
+          forbiddenIncludes: ["You cannot enter yet."],
+        },
+      ],
+      aiPromptTemplate: defaultAiPromptTemplate,
+    },
+    success: {
+      message:
+        "Nice! You used multiple conditions to create a more realistic decision.",
+      nextLessonPrompt:
+        "Next, you’ll combine decisions into a pass-or-fail mini project.",
+    },
+    failure: {
+      encouragement:
+        "You’re close. This lesson needs two values, if/else, and a condition using and or or.",
+      retryPrompt:
+        "Change the starter values and messages, then use and or or inside the if condition.",
+    },
+  },
+  {
+    id: "python-017",
+    language: "python",
+    order: 17,
+    slug: "pass-or-fail-checker",
+    title: "Pass or Fail Checker Mini Project",
+    shortDescription:
+      "Build a small program that checks a score and prints the result.",
+    difficulty: "beginner",
+    estimatedMinutes: 12,
+    xpReward: 50,
+    moduleId: "python-module-3",
+    moduleTitle: "Decisions",
+    moduleOrder: 3,
+    lessonType: "mini-project",
+    learningGoal:
+      "Combine input(), int(), if/else, comparison operators, and custom messages into one decision-based mini project.",
+    realLifeWhy:
+      "Decision-based programs are everywhere: grade checkers, eligibility forms, quiz results, warnings, recommendations, and approval systems.",
+    concept: {
+      explanation:
+        "This mini-project uses the full decision pattern: ask for input, convert the number, check a condition, and print one of two possible results.",
+      keyIdea: "A useful program can ask, calculate, decide, and respond.",
+    },
+    starterCode: {
+      editorLanguage: "python",
+      code: `name = input("Enter your name: ")
+score = input("Enter your score: ")
+
+if int(score) >= 75:
+    print(f"{name}, you passed!")
+else:
+    print(f"{name}, keep practicing.")`,
+    },
+    task: {
+      instruction:
+        "Customize the pass-or-fail checker by changing the prompts, cutoff logic if you want, and both result messages.",
+      successCriteria: [
+        "The code asks for a name using input()",
+        "The code asks for a score using input()",
+        "The score is converted using int(score)",
+        "The code uses if and else",
+        "The code compares the score with a passing cutoff",
+        "The pass message uses the name variable",
+        "The fail message uses the name variable",
+        "The starter prompts and messages are changed",
+      ],
+    },
+    hints: [
+      {
+        id: "hint-1",
+        text: "Keep int(score) so Python can compare the score as a number.",
+      },
+      {
+        id: "hint-2",
+        text: "The if block should print the passing result. The else block should print the other result.",
+      },
+      {
+        id: "hint-3",
+        text: 'Example: if int(score) >= 80: print(f"Great job, {name}!")',
+      },
+    ],
+    check: {
+      mode: "static-rules",
+      rules: [
+        {
+          id: "uses-input",
+          description: "The code should use input().",
+          requiredIncludes: ["input("],
+        },
+        {
+          id: "stores-name",
+          description: "The code should store the user's name.",
+          requiredIncludes: ["name", "="],
+        },
+        {
+          id: "stores-score",
+          description: "The code should store the user's score.",
+          requiredIncludes: ["score", "="],
+        },
+        {
+          id: "uses-int-score",
+          description: "The code should convert score using int(score).",
+          requiredIncludes: ["int(score)"],
+        },
+        {
+          id: "uses-if",
+          description: "The code should use if.",
+          requiredIncludes: ["if "],
+        },
+        {
+          id: "uses-else",
+          description: "The code should use else.",
+          requiredIncludes: ["else:"],
+        },
+        {
+          id: "uses-comparison",
+          description: "The code should compare the score with a cutoff.",
+          requiredIncludes: [">="],
+        },
+        {
+          id: "uses-print",
+          description: "The code should print result messages.",
+          requiredIncludes: ["print("],
+        },
+        {
+          id: "uses-name-in-messages",
+          description: "The result messages should use name.",
+          requiredIncludes: ["name"],
+        },
+        {
+          id: "changed-name-prompt",
+          description: "The starter name prompt should be changed.",
+          forbiddenIncludes: ["Enter your name:"],
+        },
+        {
+          id: "changed-score-prompt",
+          description: "The starter score prompt should be changed.",
+          forbiddenIncludes: ["Enter your score:"],
+        },
+        {
+          id: "changed-pass-message",
+          description: "The starter pass message should be changed.",
+          forbiddenIncludes: ["you passed!"],
+        },
+        {
+          id: "changed-fail-message",
+          description: "The starter fail message should be changed.",
+          forbiddenIncludes: ["keep practicing."],
+        },
+      ],
+      aiPromptTemplate: defaultAiPromptTemplate,
+    },
+    success: {
+      message:
+        "Module 3 complete! You can now make Python programs choose between outcomes using if, else, comparisons, and multiple conditions.",
+      nextLessonPrompt:
+        "Next, we’ll start Module 4 and teach your programs how to repeat actions with loops.",
+    },
+    failure: {
+      encouragement:
+        "You’re close. This mini-project needs name input, score input, int(score), if/else, and custom result messages.",
+      retryPrompt:
+        "Change both prompts and messages, but keep name, score, int(score), if, else, and the score comparison working.",
+    },
+  },
+  {
     id: "sql-001",
     language: "sql",
     order: 1,

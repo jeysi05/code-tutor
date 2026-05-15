@@ -228,11 +228,18 @@ function getDefaultSimulatedPythonInputValue(variableName: string, prompt: strin
   }
 
   if (
-    normalizedVariableName.includes("price") ||
+    normalizedVariableName.includes("grade") ||
     normalizedVariableName.includes("score") ||
+    normalizedPrompt.includes("grade") ||
+    normalizedPrompt.includes("score")
+  ) {
+    return "85";
+  }
+
+  if (
+    normalizedVariableName.includes("price") ||
     normalizedVariableName.includes("number") ||
     normalizedPrompt.includes("price") ||
-    normalizedPrompt.includes("score") ||
     normalizedPrompt.includes("number")
   ) {
     return "10";
@@ -259,11 +266,30 @@ function getPythonInputPrompt(expression: string) {
   return "";
 }
 
+type PythonRuntimeLine = {
+  indent: number;
+  text: string;
+};
+
 function getCleanPythonLines(code: string) {
   return code
     .split("\n")
     .map((line) => line.trim())
     .filter((line) => line.length > 0 && !line.startsWith("#"));
+}
+
+function getPythonRuntimeLines(code: string): PythonRuntimeLine[] {
+  return code
+    .split("\n")
+    .map((line) => line.replace(/\t/g, "    "))
+    .map((line) => {
+      const text = line.trim();
+      const indentMatch = line.match(/^\s*/);
+      const indent = indentMatch ? indentMatch[0].length : 0;
+
+      return { indent, text };
+    })
+    .filter((line) => line.text.length > 0 && !line.text.startsWith("#"));
 }
 
 function getPythonInputDefinitions(code: string): PythonInputDefinition[] {
@@ -434,59 +460,300 @@ function evaluatePythonExpression(expression: string, variables: VariableMap) {
   return "";
 }
 
+function splitPythonConditionByKeyword(condition: string, keyword: "and" | "or") {
+  const parts: string[] = [];
+  let currentPart = "";
+  let quoteCharacter: string | null = null;
+  let index = 0;
+
+  while (index < condition.length) {
+    const character = condition[index];
+
+    if (
+      (character === '"' || character === "'") &&
+      condition[index - 1] !== "\\"
+    ) {
+      if (quoteCharacter === character) {
+        quoteCharacter = null;
+      } else if (!quoteCharacter) {
+        quoteCharacter = character;
+      }
+
+      currentPart += character;
+      index += 1;
+      continue;
+    }
+
+    const keywordWithSpaces = ` ${keyword} `;
+    const nextChunk = condition.slice(index, index + keywordWithSpaces.length);
+
+    if (!quoteCharacter && nextChunk === keywordWithSpaces) {
+      parts.push(currentPart.trim());
+      currentPart = "";
+      index += keywordWithSpaces.length;
+      continue;
+    }
+
+    currentPart += character;
+    index += 1;
+  }
+
+  if (currentPart.trim().length > 0) {
+    parts.push(currentPart.trim());
+  }
+
+  return parts;
+}
+
+function stripOuterParentheses(expression: string) {
+  let cleanedExpression = expression.trim();
+
+  while (
+    cleanedExpression.startsWith("(") &&
+    cleanedExpression.endsWith(")")
+  ) {
+    cleanedExpression = cleanedExpression.slice(1, -1).trim();
+  }
+
+  return cleanedExpression;
+}
+
+function evaluatePythonConditionOperand(
+  operand: string,
+  variables: VariableMap
+) {
+  const evaluatedOperand = evaluatePythonExpression(operand, variables);
+
+  if (evaluatedOperand.length > 0) {
+    return evaluatedOperand;
+  }
+
+  return removeQuotes(operand.trim());
+}
+
+function evaluatePythonAtomicCondition(
+  condition: string,
+  variables: VariableMap
+) {
+  const cleanedCondition = stripOuterParentheses(condition);
+  const comparisonMatch = cleanedCondition.match(/(>=|<=|==|!=|>|<)/);
+
+  if (!comparisonMatch) {
+    const value = evaluatePythonConditionOperand(cleanedCondition, variables);
+
+    if (value === "") return false;
+    if (value === "0") return false;
+    if (value.toLowerCase() === "false") return false;
+
+    return true;
+  }
+
+  const operator = comparisonMatch[1];
+  const operatorIndex = cleanedCondition.indexOf(operator);
+  const leftOperand = cleanedCondition.slice(0, operatorIndex).trim();
+  const rightOperand = cleanedCondition
+    .slice(operatorIndex + operator.length)
+    .trim();
+
+  const leftValue = evaluatePythonConditionOperand(leftOperand, variables);
+  const rightValue = evaluatePythonConditionOperand(rightOperand, variables);
+  const leftNumber = parseNumber(leftValue);
+  const rightNumber = parseNumber(rightValue);
+
+  if (leftNumber !== null && rightNumber !== null) {
+    if (operator === ">=") return leftNumber >= rightNumber;
+    if (operator === "<=") return leftNumber <= rightNumber;
+    if (operator === ">") return leftNumber > rightNumber;
+    if (operator === "<") return leftNumber < rightNumber;
+    if (operator === "==") return leftNumber === rightNumber;
+    if (operator === "!=") return leftNumber !== rightNumber;
+  }
+
+  if (operator === "==") return leftValue === rightValue;
+  if (operator === "!=") return leftValue !== rightValue;
+
+  return false;
+}
+
+function evaluatePythonCondition(condition: string, variables: VariableMap) {
+  const cleanedCondition = stripOuterParentheses(condition);
+
+  const orParts = splitPythonConditionByKeyword(cleanedCondition, "or");
+
+  if (orParts.length > 1) {
+    return orParts.some((part) => evaluatePythonCondition(part, variables));
+  }
+
+  const andParts = splitPythonConditionByKeyword(cleanedCondition, "and");
+
+  if (andParts.length > 1) {
+    return andParts.every((part) => evaluatePythonCondition(part, variables));
+  }
+
+  if (cleanedCondition.startsWith("not ")) {
+    return !evaluatePythonCondition(cleanedCondition.slice(4), variables);
+  }
+
+  return evaluatePythonAtomicCondition(cleanedCondition, variables);
+}
+
+function findPythonBlockEnd(
+  lines: PythonRuntimeLine[],
+  startIndex: number,
+  parentIndent: number
+) {
+  let index = startIndex;
+
+  while (index < lines.length && lines[index].indent > parentIndent) {
+    index += 1;
+  }
+
+  return index;
+}
+
+type PythonExecutionState = {
+  inputIndex: number;
+};
+
+function executePythonStatement(
+  text: string,
+  variables: VariableMap,
+  outputLines: string[],
+  simulatedInputValues: SimulatedInputValues,
+  state: PythonExecutionState
+) {
+  const assignmentMatch = text.match(
+    /^([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(.+)$/
+  );
+
+  if (assignmentMatch) {
+    const variableName = assignmentMatch[1];
+    const rawValue = assignmentMatch[2].trim();
+    const inputPrompt = getPythonInputPrompt(rawValue);
+
+    if (inputPrompt !== null) {
+      const inputKey = `${variableName}:${state.inputIndex}`;
+      const fallbackInputValue = getDefaultSimulatedPythonInputValue(
+        variableName,
+        inputPrompt
+      );
+      const simulatedInputValue =
+        simulatedInputValues[inputKey] ?? fallbackInputValue;
+
+      variables[variableName] = createStoredVariable(simulatedInputValue);
+      outputLines.push(`${inputPrompt}${simulatedInputValue}`);
+      state.inputIndex += 1;
+      return;
+    }
+
+    const evaluatedValue = evaluatePythonExpression(rawValue, variables);
+
+    variables[variableName] = createStoredVariable(
+      evaluatedValue.length > 0 ? evaluatedValue : rawValue
+    );
+    return;
+  }
+
+  const printMatch = text.match(/^print\s*\((.*)\)\s*$/);
+
+  if (!printMatch) return;
+
+  const expression = printMatch[1];
+  const output = evaluatePythonExpression(expression, variables);
+
+  if (output.length > 0) {
+    outputLines.push(output);
+  }
+}
+
+function executePythonLines(
+  lines: PythonRuntimeLine[],
+  variables: VariableMap,
+  outputLines: string[],
+  simulatedInputValues: SimulatedInputValues,
+  state: PythonExecutionState
+) {
+  let index = 0;
+
+  while (index < lines.length) {
+    const currentLine = lines[index];
+    const ifMatch = currentLine.text.match(/^if\s+(.+):$/);
+
+    if (ifMatch) {
+      const parentIndent = currentLine.indent;
+      const ifBlockStart = index + 1;
+      const ifBlockEnd = findPythonBlockEnd(lines, ifBlockStart, parentIndent);
+      const possibleElseLine = lines[ifBlockEnd];
+      let elseBlockStart = ifBlockEnd;
+      let elseBlockEnd = ifBlockEnd;
+
+      if (
+        possibleElseLine &&
+        possibleElseLine.indent === parentIndent &&
+        /^else\s*:$/.test(possibleElseLine.text)
+      ) {
+        elseBlockStart = ifBlockEnd + 1;
+        elseBlockEnd = findPythonBlockEnd(
+          lines,
+          elseBlockStart,
+          parentIndent
+        );
+      }
+
+      const shouldRunIfBlock = evaluatePythonCondition(ifMatch[1], variables);
+      const selectedBlock = shouldRunIfBlock
+        ? lines.slice(ifBlockStart, ifBlockEnd)
+        : lines.slice(elseBlockStart, elseBlockEnd);
+
+      executePythonLines(
+        selectedBlock,
+        variables,
+        outputLines,
+        simulatedInputValues,
+        state
+      );
+
+      index = elseBlockEnd;
+      continue;
+    }
+
+    if (/^else\s*:$/.test(currentLine.text)) {
+      const elseBlockEnd = findPythonBlockEnd(
+        lines,
+        index + 1,
+        currentLine.indent
+      );
+      index = elseBlockEnd;
+      continue;
+    }
+
+    executePythonStatement(
+      currentLine.text,
+      variables,
+      outputLines,
+      simulatedInputValues,
+      state
+    );
+    index += 1;
+  }
+}
+
 function getPythonOutput(
   code: string,
   simulatedInputValues: SimulatedInputValues
 ) {
-  const lines = getCleanPythonLines(code);
+  const lines = getPythonRuntimeLines(code);
   const variables: VariableMap = {};
   const outputLines: string[] = [];
-  let inputIndex = 0;
+  const state: PythonExecutionState = { inputIndex: 0 };
 
-  lines.forEach((line) => {
-    const assignmentMatch = line.match(
-      /^([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*(.+)$/
-    );
-
-    if (assignmentMatch) {
-      const variableName = assignmentMatch[1];
-      const rawValue = assignmentMatch[2].trim();
-      const inputPrompt = getPythonInputPrompt(rawValue);
-
-      if (inputPrompt !== null) {
-        const inputKey = `${variableName}:${inputIndex}`;
-        const fallbackInputValue = getDefaultSimulatedPythonInputValue(
-          variableName,
-          inputPrompt
-        );
-        const simulatedInputValue =
-          simulatedInputValues[inputKey] ?? fallbackInputValue;
-
-        variables[variableName] = createStoredVariable(simulatedInputValue);
-        outputLines.push(`${inputPrompt}${simulatedInputValue}`);
-        inputIndex += 1;
-        return;
-      }
-
-      const evaluatedValue = evaluatePythonExpression(rawValue, variables);
-
-      variables[variableName] = createStoredVariable(
-        evaluatedValue.length > 0 ? evaluatedValue : rawValue
-      );
-      return;
-    }
-
-    const printMatch = line.match(/^print\s*\((.*)\)\s*$/);
-
-    if (!printMatch) return;
-
-    const expression = printMatch[1];
-    const output = evaluatePythonExpression(expression, variables);
-
-    if (output.length > 0) {
-      outputLines.push(output);
-    }
-  });
+  executePythonLines(
+    lines,
+    variables,
+    outputLines,
+    simulatedInputValues,
+    state
+  );
 
   if (outputLines.length === 0) {
     return ["Python output will appear here when your code uses print()."];
