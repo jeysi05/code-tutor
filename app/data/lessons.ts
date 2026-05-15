@@ -458,8 +458,8 @@ console.log(age);`,
     language: "python",
     order: 1,
     slug: "your-first-message",
-    title: "Your First Message",
-    shortDescription: "Write a simple message using Python.",
+    title: "Make Python Say Something",
+    shortDescription: "Change one line and make Python print your own message.",
     difficulty: "beginner",
     estimatedMinutes: 5,
     xpReward: 20,
@@ -467,13 +467,13 @@ console.log(age);`,
     moduleTitle: "First Programs",
     moduleOrder: 1,
     lessonType: "concept",
-    learningGoal: "Learn how to display text using the print function.",
+    learningGoal: "Make Python show text on the screen using print().",
     realLifeWhy:
-      "Every program needs a way to show results. Whether you are building a calculator, a chatbot, or a data tool, printing output helps you see what your code is doing.",
+      "Before a program can feel useful, it needs to talk back. A calculator shows answers, a game shows scores, and a chatbot shows replies. print() is your first way to make Python respond.",
     concept: {
       explanation:
-        "In Python, print() tells the computer to show a message on the screen. Put your message inside quotation marks so Python knows it is text.",
-      keyIdea: "print() is how Python speaks back to you.",
+        "print() is Python’s “say this on screen” command. Put text inside quotation marks so Python treats it as words, not code.",
+      keyIdea: "print() is how your program talks to you.",
     },
     starterCode: {
       editorLanguage: "python",
@@ -481,7 +481,7 @@ console.log(age);`,
     },
     task: {
       instruction:
-        "Change the message so Python prints your own short introduction.",
+        "Change the message so Python prints a short intro in your own words.",
       successCriteria: [
         "The code uses print()",
         "The message is inside quotation marks",
@@ -491,7 +491,7 @@ console.log(age);`,
     hints: [
       {
         id: "hint-1",
-        text: "Keep the word print, then change only the text inside the quotation marks.",
+        text: "Keep print() exactly where it is first.",
       },
       {
         id: "hint-2",
@@ -516,13 +516,13 @@ console.log(age);`,
     },
     success: {
       message:
-        "Nice! You just made Python speak with your own message. That is your first tiny program.",
-      nextLessonPrompt: "Next, we’ll store information using a variable.",
+        "Nice — you made Python say something that came from you, not the starter code.",
+      nextLessonPrompt: "Next, we’ll give Python something to remember.",
     },
     failure: {
       encouragement:
-        "You’re close. This lesson is just about making Python print your own message.",
-      retryPrompt: "Try changing only the words inside the quotation marks.",
+        "You’re close. This one is just about changing the message inside print().",
+      retryPrompt: "Keep print(), keep the quotation marks, and replace Hello, world! with your own message.",
     },
   },
   {
@@ -530,8 +530,8 @@ console.log(age);`,
     language: "python",
     order: 2,
     slug: "store-your-name",
-    title: "Store Your Name",
-    shortDescription: "Use a variable to remember text.",
+    title: "Give Python a Name to Remember",
+    shortDescription: "Store a name in a variable and print it back.",
     difficulty: "beginner",
     estimatedMinutes: 6,
     xpReward: 25,
@@ -539,13 +539,13 @@ console.log(age);`,
     moduleTitle: "First Programs",
     moduleOrder: 1,
     lessonType: "concept",
-    learningGoal: "Learn how to store text in a variable and print it.",
+    learningGoal: "Store text in a variable, then reuse that variable with print().",
     realLifeWhy:
-      "Apps remember information all the time: names, usernames, scores, settings, and messages. Variables are how programs store values so they can reuse them later.",
+      "Apps remember things all the time: usernames, saved drafts, scores, settings, and profile names. A variable is the first tiny version of that memory.",
     concept: {
       explanation:
-        "A variable is a named container for a value. In Python, you create one by writing a name, an equals sign, and the value you want to store.",
-      keyIdea: "A variable lets your code remember something.",
+        "A variable is a label attached to a value. Instead of typing the same text again and again, you store it once and reuse the name.",
+      keyIdea: "A variable lets Python remember something for later.",
     },
     starterCode: {
       editorLanguage: "python",
@@ -554,7 +554,7 @@ print(name)`,
     },
     task: {
       instruction:
-        "Change the variable value so Python stores and prints your own name.",
+        "Put your own name inside the name variable, then print the variable.",
       successCriteria: [
         "The code creates a variable named name",
         "The code uses = to store a value",
@@ -569,11 +569,11 @@ print(name)`,
       },
       {
         id: "hint-2",
-        text: "Change only the text inside the quotation marks on the first line.",
+        text: "Change the text inside the quotation marks on the first line.",
       },
       {
         id: "hint-3",
-        text: "The second line should still be print(name).",
+        text: "Keep print(name). That prints the value stored in the variable.",
       },
     ],
     check: {
@@ -598,15 +598,15 @@ print(name)`,
       aiPromptTemplate: defaultAiPromptTemplate,
     },
     success: {
-      message: "Great! You stored text in a variable and printed it back out.",
+      message: "Nice! Python remembered the name and printed it back using the variable.",
       nextLessonPrompt:
-        "Next, you’ll store a number and learn when quotation marks are not needed.",
+        "Next, we’ll store a number instead of text.",
     },
     failure: {
       encouragement:
-        "You’re close. This lesson is about storing your own name in a variable.",
+        "Almost. The goal is to change what the name variable stores.",
       retryPrompt:
-        "Keep the variable name as name, change Alex to your own name, then print it with print(name).",
+        "Keep name = ..., change Alex to another name, then keep print(name).",
     },
   },
   {
@@ -614,8 +614,8 @@ print(name)`,
     language: "python",
     order: 3,
     slug: "store-a-number",
-    title: "Store a Number",
-    shortDescription: "Use a variable to remember a number.",
+    title: "Store a Number Python Can Use",
+    shortDescription: "Save a number in a variable without quotation marks.",
     difficulty: "beginner",
     estimatedMinutes: 6,
     xpReward: 25,
@@ -623,13 +623,13 @@ print(name)`,
     moduleTitle: "First Programs",
     moduleOrder: 1,
     lessonType: "concept",
-    learningGoal: "Learn how to store a number in a variable and print it.",
+    learningGoal: "Store a number in a variable and print it.",
     realLifeWhy:
-      "Real programs constantly work with numbers: prices, ages, scores, steps, totals, ratings, and measurements. Storing numbers is the beginning of making programs calculate things.",
+      "Programs use numbers everywhere: ages, prices, grades, scores, quantities, timers, and measurements. Once Python can store numbers, it can start calculating.",
     concept: {
       explanation:
-        "Python can store numbers without quotation marks. Text usually uses quotation marks, but numbers can be written directly.",
-      keyIdea: "Text uses quotation marks. Numbers usually do not.",
+        "Text usually goes inside quotation marks. Numbers usually do not. That difference matters because Python can do math with numbers.",
+      keyIdea: "Text gets quotes. Numbers usually stand on their own.",
     },
     starterCode: {
       editorLanguage: "python",
@@ -638,7 +638,7 @@ print(age)`,
     },
     task: {
       instruction:
-        "Change the number so Python stores and prints your own age or any favorite number.",
+        "Change the number stored in age, then print it.",
       successCriteria: [
         "The code creates a variable named age",
         "The value is a number",
@@ -682,12 +682,12 @@ print(age)`,
       aiPromptTemplate: defaultAiPromptTemplate,
     },
     success: {
-      message: "Nice! You stored a number in a variable and printed it.",
+      message: "Great — you stored a real number that Python can use later.",
       nextLessonPrompt:
-        "Next, you’ll print multiple lines to create a small profile.",
+        "Next, we’ll print more than one line so output feels like a tiny profile.",
     },
     failure: {
-      encouragement: "Almost. This lesson is about storing a number, not text.",
+      encouragement: "You’re close. This should be a number, not text.",
       retryPrompt: "Use age = your_number, then print it with print(age).",
     },
   },
@@ -696,8 +696,8 @@ print(age)`,
     language: "python",
     order: 4,
     slug: "print-multiple-lines",
-    title: "Print Multiple Lines",
-    shortDescription: "Use more than one print statement.",
+    title: "Print a Mini Profile",
+    shortDescription: "Use multiple print lines to show more than one detail.",
     difficulty: "beginner",
     estimatedMinutes: 6,
     xpReward: 25,
@@ -706,13 +706,13 @@ print(age)`,
     moduleOrder: 1,
     lessonType: "practice",
     learningGoal:
-      "Learn how multiple print statements create multiple output lines.",
+      "Use more than one print() statement to create multi-line output.",
     realLifeWhy:
-      "Programs often show more than one piece of information at a time. A receipt, profile page, quiz result, or report usually needs several lines of output.",
+      "A real result rarely fits on one line. Receipts, profiles, quiz results, and summaries all need multiple pieces of information.",
     concept: {
       explanation:
-        "Python runs code from top to bottom. If you write multiple print() statements, each one appears on its own line in the output.",
-      keyIdea: "Each print() creates a new line of output.",
+        "Python runs from top to bottom. Each print() creates a new line in the output.",
+      keyIdea: "More print() lines means more output lines.",
     },
     starterCode: {
       editorLanguage: "python",
@@ -721,7 +721,7 @@ print("Favorite language: Python")`,
     },
     task: {
       instruction:
-        "Change the two lines so Python prints a tiny profile about you.",
+        "Change both print lines so Python shows a tiny profile about you.",
       successCriteria: [
         "The code uses at least two print() statements",
         "The first line is different from Name: Alex",
@@ -736,7 +736,7 @@ print("Favorite language: Python")`,
       },
       {
         id: "hint-2",
-        text: "Change only the text inside the quotation marks.",
+        text: "Change the text inside each pair of quotation marks.",
       },
       {
         id: "hint-3",
@@ -766,15 +766,15 @@ print("Favorite language: Python")`,
     },
     success: {
       message:
-        "Nice! You used multiple print statements to show more than one line of output.",
+        "Nice — your output now feels like a small profile, not just one random line.",
       nextLessonPrompt:
-        "Next, we can start using numbers to do simple calculations.",
+        "Next, we’ll make Python calculate something.",
     },
     failure: {
       encouragement:
-        "You’re close. This lesson is about printing two separate lines.",
+        "Almost. This lesson needs two separate print() lines.",
       retryPrompt:
-        "Keep two print() statements, then change the text inside both quotation marks.",
+        "Keep two print() statements and change the text inside both.",
     },
   },
   {
@@ -782,8 +782,8 @@ print("Favorite language: Python")`,
     language: "python",
     order: 5,
     slug: "simple-math",
-    title: "Simple Math",
-    shortDescription: "Use Python to calculate numbers.",
+    title: "Make Python Do the Math",
+    shortDescription: "Change the numbers and let Python calculate the answer.",
     difficulty: "beginner",
     estimatedMinutes: 7,
     xpReward: 30,
@@ -792,13 +792,13 @@ print("Favorite language: Python")`,
     moduleOrder: 1,
     lessonType: "practice",
     learningGoal:
-      "Learn how Python can add, subtract, multiply, and divide numbers.",
+      "Use variables and math operators to calculate a result.",
     realLifeWhy:
-      "Most useful programs do calculations. A budget tracker, grade calculator, receipt generator, fitness tracker, or game score system all need math.",
+      "Useful apps calculate constantly: totals, discounts, grades, scores, calories, budgets, and game points. This is where Python starts doing work for you.",
     concept: {
       explanation:
-        "Python can calculate numbers using operators. Use + for addition, - for subtraction, * for multiplication, and / for division.",
-      keyIdea: "Python can work like a calculator inside your code.",
+        "Python can calculate with +, -, *, and /. Store numbers in variables, then combine those variables inside print().",
+      keyIdea: "Variables plus math operators turn Python into a tiny calculator.",
     },
     starterCode: {
       editorLanguage: "python",
@@ -808,7 +808,7 @@ print(score + bonus)`,
     },
     task: {
       instruction:
-        "Change the numbers and the calculation so Python prints a new result.",
+        "Change the numbers and the operation so Python prints a new result.",
       successCriteria: [
         "The code stores at least two numbers in variables",
         "The code uses print()",
@@ -819,11 +819,11 @@ print(score + bonus)`,
     hints: [
       {
         id: "hint-1",
-        text: "Try changing the values of score and bonus first.",
+        text: "Start by changing the values of score and bonus.",
       },
       {
         id: "hint-2",
-        text: "You can replace + with -, *, or /.",
+        text: "Try replacing + with -, *, or /.",
       },
       {
         id: "hint-3",
@@ -858,15 +858,15 @@ print(score + bonus)`,
     },
     success: {
       message:
-        "Nice! You used Python variables and math operators to calculate a result.",
+        "Nice! You made Python calculate using variables instead of hardcoded answers.",
       nextLessonPrompt:
-        "Next, you’ll combine everything from this module into your first mini project.",
+        "Next, we’ll combine your first skills into a mini-project.",
     },
     failure: {
       encouragement:
-        "You’re close. This lesson is about changing the numbers and using Python to calculate.",
+        "You’re close. The program needs variables, numbers, print(), and a math operation.",
       retryPrompt:
-        "Change the starter numbers, keep print(), and use a math operator like +, -, *, or /.",
+        "Change the starter numbers, keep print(), and use +, -, *, or /.",
     },
   },
   {
@@ -874,9 +874,9 @@ print(score + bonus)`,
     language: "python",
     order: 6,
     slug: "personal-profile-generator",
-    title: "Personal Profile Generator",
+    title: "Build Your First Tiny Profile App",
     shortDescription:
-      "Build your first tiny Python mini-project using variables and print().",
+      "Combine variables and print lines into a small profile generator.",
     difficulty: "beginner",
     estimatedMinutes: 10,
     xpReward: 40,
@@ -885,14 +885,14 @@ print(score + bonus)`,
     moduleOrder: 1,
     lessonType: "mini-project",
     learningGoal:
-      "Combine print(), text variables, number variables, and multiple output lines into one small program.",
+      "Combine text variables, number variables, and multiple print lines in one mini-project.",
     realLifeWhy:
-      "Real projects are made by combining small concepts. This mini-project proves you can use output, variables, numbers, and multiple lines together instead of only practicing them separately.",
+      "Real projects are built by combining small skills. This mini-project turns output, variables, numbers, and labels into something that feels like a tiny app.",
     concept: {
       explanation:
-        "A mini-project combines several ideas into one useful program. Here, you will store information in variables, then print those variables to create a simple profile.",
+        "A mini-project is just small ideas working together. Here, Python stores your details, then prints them in a readable format.",
       keyIdea:
-        "Small concepts become real programs when you combine them together.",
+        "Small coding skills become useful when you combine them.",
     },
     starterCode: {
       editorLanguage: "python",
@@ -909,7 +909,7 @@ print(goal)`,
     },
     task: {
       instruction:
-        "Create a tiny profile about yourself by changing the name, age, and goal variables.",
+        "Customize the profile by changing the name, age, and goal variables.",
       successCriteria: [
         "The code has a name variable",
         "The code has an age variable",
@@ -923,15 +923,15 @@ print(goal)`,
     hints: [
       {
         id: "hint-1",
-        text: "Change only the values after the equals signs first.",
+        text: "Change the values after the equals signs first.",
       },
       {
         id: "hint-2",
-        text: "Text values need quotation marks. Number values usually do not.",
+        text: "Text needs quotation marks. Numbers usually do not.",
       },
       {
         id: "hint-3",
-        text: "Keep print(name), print(age), and print(goal) so Python prints the variables.",
+        text: "Keep print(name), print(age), and print(goal) so Python prints the stored values.",
       },
     ],
     check: {
@@ -987,13 +987,13 @@ print(goal)`,
     },
     success: {
       message:
-        "Module 1 complete! You can now write simple Python programs with output, variables, numbers, math, and multiple lines.",
+        "Module 1 complete! You can now make Python show output, remember values, store numbers, calculate, and build a tiny profile.",
       nextLessonPrompt:
-        "Next, we’ll start Module 2 and make programs more interactive.",
+        "Next, we’ll make your programs interactive so the user can type answers.",
     },
     failure: {
       encouragement:
-        "You’re close. This mini-project needs name, age, and goal variables, then it should print each one.",
+        "You’re close. This project needs name, age, and goal variables, then it should print each one.",
       retryPrompt:
         "Change the starter values, then keep print(name), print(age), and print(goal).",
     },
@@ -1003,8 +1003,8 @@ print(goal)`,
     language: "python",
     order: 7,
     slug: "ask-for-user-input",
-    title: "Ask for User Input",
-    shortDescription: "Use input() to let the user type an answer.",
+    title: "Let the User Talk Back",
+    shortDescription: "Use input() so the user can type an answer.",
     difficulty: "beginner",
     estimatedMinutes: 7,
     xpReward: 30,
@@ -1013,12 +1013,12 @@ print(goal)`,
     moduleOrder: 2,
     lessonType: "concept",
     learningGoal:
-      "Learn how input() lets a Python program ask the user for information.",
+      "Ask the user for information with input() and store the answer.",
     realLifeWhy:
-      "Interactive apps need information from the user. Login forms, search bars, quizzes, calculators, and chatbots all start by asking the user for input.",
+      "A program that only talks is limited. Search bars, login forms, quizzes, calculators, and chatbots all begin by listening to what the user types.",
     concept: {
       explanation:
-        "In Python, input() shows a prompt and waits for the user to type something. The answer can be stored in a variable and reused later.",
+        "input() shows a prompt and waits for the user to type. Whatever they type can be saved in a variable.",
       keyIdea: "input() lets your program listen, not just speak.",
     },
     starterCode: {
@@ -1028,7 +1028,7 @@ print(name)`,
     },
     task: {
       instruction:
-        "Change the input prompt so Python asks for your name in your own words, then print the answer.",
+        "Change the prompt so Python asks for a name in your own words, then print the answer.",
       successCriteria: [
         "The code uses input()",
         "The input answer is stored in a variable named name",
@@ -1039,7 +1039,7 @@ print(name)`,
     hints: [
       {
         id: "hint-1",
-        text: "Keep name = input(...) so the answer is stored in the name variable.",
+        text: "Keep name = input(...) so the answer is saved in name.",
       },
       {
         id: "hint-2",
@@ -1078,13 +1078,13 @@ print(name)`,
     },
     success: {
       message:
-        "Nice! You used input() to make your program ask for information and then print the answer.",
+        "Nice — your program can now ask a question and use the answer.",
       nextLessonPrompt:
-        "Next, you’ll use the user’s input inside a friendlier message.",
+        "Next, we’ll make that answer feel more personal inside a message.",
     },
     failure: {
       encouragement:
-        "You’re close. This lesson is about asking the user for input and storing the answer.",
+        "Almost. This lesson is about asking for input and storing the answer.",
       retryPrompt:
         "Use name = input(...), change the prompt text, then keep print(name).",
     },
@@ -1094,8 +1094,8 @@ print(name)`,
     language: "python",
     order: 8,
     slug: "use-input-in-a-message",
-    title: "Use Input in a Message",
-    shortDescription: "Combine user input with your own text.",
+    title: "Greet the User by Name",
+    shortDescription: "Use what the user typed inside a friendly message.",
     difficulty: "beginner",
     estimatedMinutes: 8,
     xpReward: 30,
@@ -1104,14 +1104,14 @@ print(name)`,
     moduleOrder: 2,
     lessonType: "practice",
     learningGoal:
-      "Learn how to combine a value from input() with a custom message.",
+      "Combine user input with your own text in print().",
     realLifeWhy:
-      "Apps feel more personal when they respond using the user’s information. A greeting, profile screen, chatbot reply, or confirmation message often includes something the user typed.",
+      "Personal messages make apps feel alive. A greeting, confirmation screen, quiz result, or chatbot reply often includes something the user typed.",
     concept: {
       explanation:
-        "After input() stores an answer in a variable, you can use that variable inside print(). You can combine text and variables using string concatenation or an f-string.",
+        "After input() stores an answer in a variable, you can place that variable inside a message using + or an f-string.",
       keyIdea:
-        "User input becomes more useful when your program uses it in a message.",
+        "Input becomes useful when your program responds with it.",
     },
     starterCode: {
       editorLanguage: "python",
@@ -1120,7 +1120,7 @@ print("Hello, " + name)`,
     },
     task: {
       instruction:
-        "Change the prompt and greeting so Python asks for a name and prints a friendly custom message.",
+        "Change the prompt and greeting so Python prints a custom message using name.",
       successCriteria: [
         "The code uses input()",
         "The answer is stored in a variable named name",
@@ -1133,7 +1133,7 @@ print("Hello, " + name)`,
     hints: [
       {
         id: "hint-1",
-        text: "Keep name = input(...) so the answer is saved.",
+        text: "You can use either + or an f-string, like print(f\"Welcome, {name}\").",
       },
       {
         id: "hint-2",
@@ -1182,13 +1182,13 @@ print("Hello, " + name)`,
     },
     success: {
       message:
-        "Nice! You made your program respond with a message that uses the user’s input.",
+        "Nice! Your program now replies using the user’s own name.",
       nextLessonPrompt:
-        "Next, you’ll collect more than one input and print a short introduction.",
+        "Next, we’ll ask for more than one answer.",
     },
     failure: {
       encouragement:
-        "You’re close. This lesson is about using the user's input inside a friendly message.",
+        "You’re close. The message needs to include the user’s input.",
       retryPrompt:
         "Use name = input(...), change the prompt, then print a message that includes name.",
     },
@@ -1198,8 +1198,8 @@ print("Hello, " + name)`,
     language: "python",
     order: 9,
     slug: "store-multiple-inputs",
-    title: "Store Multiple Inputs",
-    shortDescription: "Ask the user for more than one answer.",
+    title: "Remember Two Answers",
+    shortDescription: "Ask for two details and use both in one sentence.",
     difficulty: "beginner",
     estimatedMinutes: 8,
     xpReward: 30,
@@ -1208,14 +1208,14 @@ print("Hello, " + name)`,
     moduleOrder: 2,
     lessonType: "practice",
     learningGoal:
-      "Learn how to collect multiple pieces of information using input().",
+      "Collect multiple pieces of information with input().",
     realLifeWhy:
-      "Most apps ask for more than one detail. A sign-up form asks for a name and email, a food app asks for an order and address, and a quiz asks several answers.",
+      "Imagine a food app that remembers your name but forgets your order. Not very useful. Real apps usually need more than one answer.",
     concept: {
       explanation:
-        "You can use input() more than once. Each answer should usually be stored in its own variable so your program can use them later.",
+        "You can use input() more than once. Each answer should go into its own variable so Python can use them separately.",
       keyIdea:
-        "Multiple inputs let your program collect multiple details from the user.",
+        "Two inputs let your program feel more like a real conversation.",
     },
     starterCode: {
       editorLanguage: "python",
@@ -1226,7 +1226,7 @@ print(f"{name} likes {favorite_food}.")`,
     },
     task: {
       instruction:
-        "Ask for two details, then print one complete sentence that uses both answers.",
+        "Ask for a name and a favorite food, then print one sentence using both answers.",
       successCriteria: [
         "The code uses input() at least twice",
         "The first answer is stored in a variable named name",
@@ -1244,7 +1244,7 @@ print(f"{name} likes {favorite_food}.")`,
       },
       {
         id: "hint-2",
-        text: "Use both variables inside the final print() line.",
+        text: "Use both variables in the final print() line.",
       },
       {
         id: "hint-3",
@@ -1309,13 +1309,13 @@ print(f"{name} likes {favorite_food}.")`,
     },
     success: {
       message:
-        "Great work! You collected multiple inputs and used both answers in one sentence.",
+        "Great! Your program collected two answers and used them together.",
       nextLessonPrompt:
-        "Next, you’ll convert text input into numbers so your programs can calculate user answers.",
+        "Next, we’ll turn typed number answers into real numbers Python can calculate with.",
     },
     failure: {
       encouragement:
-        "You’re close. This lesson needs two input() lines and a final message that uses both answers.",
+        "You’re close. This needs two input() lines and one final message using both answers.",
       retryPrompt:
         "Ask for name and favorite_food, change both prompts, then print a sentence using both variables.",
     },
@@ -1325,8 +1325,8 @@ print(f"{name} likes {favorite_food}.")`,
     language: "python",
     order: 10,
     slug: "convert-text-to-numbers",
-    title: "Convert Text to Numbers",
-    shortDescription: "Use int() to turn input text into a number.",
+    title: "Turn Typed Text into a Number",
+    shortDescription: "Use int() so Python can calculate with user input.",
     difficulty: "beginner",
     estimatedMinutes: 9,
     xpReward: 35,
@@ -1335,13 +1335,13 @@ print(f"{name} likes {favorite_food}.")`,
     moduleOrder: 2,
     lessonType: "concept",
     learningGoal:
-      "Learn why input() gives text by default and how int() converts it into a number.",
+      "Convert input text into a number using int().",
     realLifeWhy:
-      "Apps often ask users for numbers: age, quantity, budget, score, or price. But user input starts as text, so programs must convert it before doing math.",
+      "When a user types 19, Python first receives it as text. For age calculators, budgets, quantities, and scores, you need to convert that text before doing math.",
     concept: {
       explanation:
-        "In Python, input() always gives back text. If the user types 19, Python treats it like the text \"19\". To calculate with it, use int() to convert it into a number.",
-      keyIdea: "Use int() when you need to do math with a number from input().",
+        "input() always gives text. int() turns number-looking text, like \"19\", into the number 19.",
+      keyIdea: "Use int() when typed input needs to become a number.",
     },
     starterCode: {
       editorLanguage: "python",
@@ -1352,7 +1352,7 @@ print(f"Next year, you will be {next_year}.")`,
     },
     task: {
       instruction:
-        "Change the prompt and final message, then use int() to calculate the user's age next year.",
+        "Change the prompt and final message, then calculate the user’s age next year with int(age).",
       successCriteria: [
         "The code uses input()",
         "The answer is stored in a variable named age",
@@ -1367,15 +1367,15 @@ print(f"Next year, you will be {next_year}.")`,
     hints: [
       {
         id: "hint-1",
-        text: "input() gives text, even if the user types a number.",
+        text: "input() gives text, even when the user types digits.",
       },
       {
         id: "hint-2",
-        text: "Use int(age) to turn the age text into a number.",
+        text: "int(age) turns the typed age into a number.",
       },
       {
         id: "hint-3",
-        text: "Example: next_year = int(age) + 1",
+        text: "Keep next_year = int(age) + 1.",
       },
     ],
     check: {
@@ -1431,13 +1431,13 @@ print(f"Next year, you will be {next_year}.")`,
     },
     success: {
       message:
-        "Nice! You converted input text into a number and used it in a calculation.",
+        "Nice! You converted typed text into a number and used it in a calculation.",
       nextLessonPrompt:
-        "Next, you’ll combine input and number conversion into a small age calculator.",
+        "Next, we’ll use this pattern in a small calculator project.",
     },
     failure: {
       encouragement:
-        "You’re close. This lesson needs input(), int(age), + 1, and a printed message using next_year.",
+        "You’re close. This lesson needs input(), int(age), + 1, and a message using next_year.",
       retryPrompt:
         "Store the input in age, calculate next_year = int(age) + 1, then print a custom sentence using next_year.",
     },
@@ -1447,9 +1447,9 @@ print(f"Next year, you will be {next_year}.")`,
     language: "python",
     order: 11,
     slug: "age-calculator-mini-project",
-    title: "Age Calculator Mini Project",
+    title: "Build a Tiny Age Calculator",
     shortDescription:
-      "Build a tiny interactive age calculator using input(), int(), variables, and print().",
+      "Ask, convert, calculate, and respond in one mini-project.",
     difficulty: "beginner",
     estimatedMinutes: 12,
     xpReward: 45,
@@ -1458,12 +1458,12 @@ print(f"Next year, you will be {next_year}.")`,
     moduleOrder: 2,
     lessonType: "mini-project",
     learningGoal:
-      "Combine multiple inputs, number conversion, math, and friendly output into one mini-project.",
+      "Combine input(), int(), variables, math, and friendly output.",
     realLifeWhy:
-      "Real interactive programs often collect information, convert values, calculate results, and show a friendly response. This is the basic pattern behind forms, calculators, quizzes, and dashboards.",
+      "This is the pattern behind many beginner-friendly apps: ask for information, convert what needs converting, calculate something, then show a helpful result.",
     concept: {
       explanation:
-        "A mini-project combines several skills. This time, you will ask for a name and age, convert the age into a number, calculate a result, and print clear messages for the user.",
+        "This mini-project asks for a name and age, converts the age into a number, calculates two results, and prints friendly messages.",
       keyIdea:
         "Interactive programs ask, convert, calculate, and respond.",
     },
@@ -1481,7 +1481,7 @@ print(f"Double your age is {double_age}.")`,
     },
     task: {
       instruction:
-        "Customize the age calculator by changing both prompts and all final messages while keeping the calculation working.",
+        "Customize the calculator by changing both prompts and all final messages while keeping the math working.",
       successCriteria: [
         "The code asks for a name using input()",
         "The code asks for an age using input()",
@@ -1498,15 +1498,15 @@ print(f"Double your age is {double_age}.")`,
     hints: [
       {
         id: "hint-1",
-        text: "Keep the two input() lines so your program asks for name and age.",
+        text: "Keep the two input() lines for name and age.",
       },
       {
         id: "hint-2",
-        text: "Use int(age) before doing math with the age input.",
+        text: "Use int(age) before doing math with the typed age.",
       },
       {
         id: "hint-3",
-        text: "You can customize the messages inside print() without changing the variable names.",
+        text: "Change the message text, but keep the variable names working.",
       },
     ],
     check: {
@@ -1592,13 +1592,13 @@ print(f"Double your age is {double_age}.")`,
     },
     success: {
       message:
-        "Module 2 complete! You can now ask for input, use input in messages, collect multiple answers, convert text into numbers, and build a small interactive calculator.",
+        "Module 2 complete! Your programs can now ask questions, use answers, convert typed numbers, and build a small interactive calculator.",
       nextLessonPrompt:
-        "Next, we’ll start Module 3 and teach your programs how to make decisions with if statements.",
+        "Next, we’ll teach Python how to make decisions.",
     },
     failure: {
       encouragement:
-        "You’re close. This mini-project needs name input, age input, int(age), next_year, double_age, and custom printed messages.",
+        "You’re close. This project needs name input, age input, int(age), next_year, double_age, and custom messages.",
       retryPrompt:
         "Change both prompts and final messages, but keep name, age, int(age), next_year, and double_age working.",
     },
@@ -1608,8 +1608,8 @@ print(f"Double your age is {double_age}.")`,
     language: "python",
     order: 12,
     slug: "your-first-if-statement",
-    title: "Your First If Statement",
-    shortDescription: "Use if to make Python run code only when something is true.",
+    title: "Teach Python to Choose",
+    shortDescription: "Use if so Python only runs code when a condition is true.",
     difficulty: "beginner",
     estimatedMinutes: 8,
     xpReward: 35,
@@ -1618,13 +1618,13 @@ print(f"Double your age is {double_age}.")`,
     moduleOrder: 3,
     lessonType: "concept",
     learningGoal:
-      "Learn how an if statement lets a Python program make a simple decision.",
+      "Make Python choose whether to run a block of code using if.",
     realLifeWhy:
-      "Programs make decisions all the time: showing a warning, unlocking a feature, checking an answer, or deciding what message to show next.",
+      "Apps make decisions constantly: show a warning, unlock a button, check an answer, or decide which message to show.",
     concept: {
       explanation:
-        "An if statement checks a condition. If the condition is true, Python runs the indented code below it. If the condition is false, Python skips that block.",
-      keyIdea: "if lets your program choose whether to run a block of code.",
+        "An if statement checks a condition. If it is true, Python runs the indented code below it. If it is false, Python skips that block.",
+      keyIdea: "if gives your program a choice.",
     },
     starterCode: {
       editorLanguage: "python",
@@ -1691,13 +1691,13 @@ if is_ready == "yes":
     },
     success: {
       message:
-        "Nice! You used if to make Python run code only when a condition is true.",
+        "Nice! Python made its first decision in your code.",
       nextLessonPrompt:
-        "Next, you’ll add else so your program can respond when the condition is false.",
+        "Next, we’ll add an “otherwise” path with else.",
     },
     failure: {
       encouragement:
-        "You’re close. This lesson needs an if statement, a comparison, and an indented print message.",
+        "You’re close. This needs an if statement, a comparison, and an indented print message.",
       retryPrompt:
         "Use if, include ==, keep the colon, and indent the print line under the if statement.",
     },
@@ -1707,8 +1707,8 @@ if is_ready == "yes":
     language: "python",
     order: 13,
     slug: "else-statements",
-    title: "Else Statements",
-    shortDescription: "Use else to handle the other outcome.",
+    title: "Add the “Otherwise” Path",
+    shortDescription: "Use else so your program has a second response.",
     difficulty: "beginner",
     estimatedMinutes: 8,
     xpReward: 35,
@@ -1717,13 +1717,13 @@ if is_ready == "yes":
     moduleOrder: 3,
     lessonType: "concept",
     learningGoal:
-      "Learn how else gives your program a second path when an if condition is false.",
+      "Use else to handle what happens when an if condition is false.",
     realLifeWhy:
-      "Good apps do not only handle the happy path. They also respond when something is missing, incorrect, unavailable, or not allowed.",
+      "Good apps do not only handle the perfect case. They also respond when something is wrong, missing, unavailable, or not allowed.",
     concept: {
       explanation:
-        "else runs when the if condition is false. Together, if and else let your program choose between two possible paths.",
-      keyIdea: "if handles true. else handles false.",
+        "else runs when the if condition is false. Together, if and else give your program two possible paths.",
+      keyIdea: "if handles true. else handles everything else.",
     },
     starterCode: {
       editorLanguage: "python",
@@ -1757,7 +1757,7 @@ else:
       },
       {
         id: "hint-3",
-        text: "Try changing score to a number above 75 and watch the output change.",
+        text: "Try a score above and below the cutoff to see both outcomes.",
       },
     ],
     check: {
@@ -1803,13 +1803,13 @@ else:
     },
     success: {
       message:
-        "Great! You used if and else to handle two different outcomes.",
+        "Great! Your program now handles two different outcomes.",
       nextLessonPrompt:
-        "Next, you’ll practice equality checks with comparison operators.",
+        "Next, we’ll practice checking whether answers match.",
     },
     failure: {
       encouragement:
-        "Almost. This lesson needs both if and else, with different messages for each path.",
+        "Almost. This lesson needs both if and else with different messages.",
       retryPrompt:
         "Keep if, else, >=, and two indented print messages. Then change the starter score and messages.",
     },
@@ -1819,8 +1819,8 @@ else:
     language: "python",
     order: 14,
     slug: "comparison-operators",
-    title: "Comparison Operators",
-    shortDescription: "Use == and != to compare values.",
+    title: "Check If an Answer Matches",
+    shortDescription: "Use == and != to compare text values.",
     difficulty: "beginner",
     estimatedMinutes: 8,
     xpReward: 35,
@@ -1829,13 +1829,13 @@ else:
     moduleOrder: 3,
     lessonType: "practice",
     learningGoal:
-      "Learn how comparison operators help Python check whether values match or do not match.",
+      "Use comparison operators to check whether values match or do not match.",
     realLifeWhy:
-      "Programs compare values constantly: checking passwords, quiz answers, selected options, search filters, and status labels.",
+      "Apps compare values all the time: passwords, quiz answers, selected options, status labels, and search filters.",
     concept: {
       explanation:
-        "Comparison operators ask questions. == checks if two values are equal. != checks if two values are not equal.",
-      keyIdea: "Comparisons turn values into true-or-false decisions.",
+        "== asks “are these the same?” while != asks “are these different?” Both create a true-or-false result.",
+      keyIdea: "Comparisons turn values into decisions.",
     },
     starterCode: {
       editorLanguage: "python",
@@ -1848,7 +1848,7 @@ else:
     },
     task: {
       instruction:
-        "Create your own answer check by changing the answer value, comparison value, and both messages.",
+        "Create your own answer check by changing the answer, comparison value, and both messages.",
       successCriteria: [
         "The code stores an answer variable",
         "The code uses if and else",
@@ -1860,11 +1860,11 @@ else:
     hints: [
       {
         id: "hint-1",
-        text: "Use == when you want to check if two values match.",
+        text: "Use == when two values should match.",
       },
       {
         id: "hint-2",
-        text: "Use != when you want to check if two values are different.",
+        text: "Use != when two values should be different.",
       },
       {
         id: "hint-3",
@@ -1914,13 +1914,13 @@ else:
     },
     success: {
       message:
-        "Nice! You used a comparison to make Python check an answer.",
+        "Nice! You made Python check whether an answer matches.",
       nextLessonPrompt:
-        "Next, you’ll compare numbers using greater than and less than.",
+        "Next, we’ll compare numbers with greater-than and less-than.",
     },
     failure: {
       encouragement:
-        "You’re close. This lesson needs an answer variable, an if/else decision, and custom messages.",
+        "You’re close. This needs an answer variable, an if/else decision, and custom messages.",
       retryPrompt:
         "Change the answer value, use if with == or !=, keep else, and update both messages.",
     },
@@ -1930,8 +1930,8 @@ else:
     language: "python",
     order: 15,
     slug: "greater-than-less-than",
-    title: "Greater Than and Less Than",
-    shortDescription: "Compare numbers with >, <, >=, and <=.",
+    title: "React to a Number",
+    shortDescription: "Use >, <, >=, and <= to check number limits.",
     difficulty: "beginner",
     estimatedMinutes: 8,
     xpReward: 35,
@@ -1940,13 +1940,13 @@ else:
     moduleOrder: 3,
     lessonType: "practice",
     learningGoal:
-      "Learn how Python compares numbers using greater than and less than operators.",
+      "Compare numbers so Python can react to cutoffs and ranges.",
     realLifeWhy:
-      "Many programs depend on number checks: age limits, grade cutoffs, stock levels, temperature warnings, and budget alerts.",
+      "Number checks power age limits, grade cutoffs, stock warnings, temperature alerts, budgets, points, and levels.",
     concept: {
       explanation:
-        "Use > for greater than, < for less than, >= for greater than or equal to, and <= for less than or equal to.",
-      keyIdea: "Number comparisons let programs react to ranges and limits.",
+        "Use >, <, >=, and <= when your program needs to ask whether a number is above, below, or equal to a limit.",
+      keyIdea: "Number comparisons let programs react to limits.",
     },
     starterCode: {
       editorLanguage: "python",
@@ -1979,7 +1979,7 @@ else:
       },
       {
         id: "hint-3",
-        text: "Example: if points >= 100: print('Level unlocked!')",
+        text: "Example: if points >= 100: print(\"Level unlocked!\").",
       },
     ],
     check: {
@@ -2020,13 +2020,13 @@ else:
     },
     success: {
       message:
-        "Great! You used number comparisons to make your program respond to a cutoff.",
+        "Great! Your program can now react to a number cutoff.",
       nextLessonPrompt:
-        "Next, you’ll combine conditions using and and or.",
+        "Next, we’ll check more than one condition at a time.",
     },
     failure: {
       encouragement:
-        "Almost. This lesson needs a number variable, an if/else decision, and custom messages.",
+        "Almost. This needs a number variable, an if/else decision, and custom messages.",
       retryPrompt:
         "Change the starter number and messages, then use a comparison like >, <, >=, or <=.",
     },
@@ -2036,8 +2036,8 @@ else:
     language: "python",
     order: 16,
     slug: "multiple-conditions",
-    title: "Multiple Conditions",
-    shortDescription: "Use and/or to check more than one condition.",
+    title: "Check Two Things at Once",
+    shortDescription: "Use and/or to combine conditions.",
     difficulty: "beginner",
     estimatedMinutes: 9,
     xpReward: 40,
@@ -2046,13 +2046,13 @@ else:
     moduleOrder: 3,
     lessonType: "practice",
     learningGoal:
-      "Learn how and and or let Python check multiple conditions in one decision.",
+      "Use and and or to check multiple conditions in one decision.",
     realLifeWhy:
-      "Real decisions often need more than one rule. Apps check age and ID, username and password, stock and payment, or schedule and availability.",
+      "Real rules often depend on more than one thing: username and password, age and ID, stock and payment, schedule and availability.",
     concept: {
       explanation:
         "and means both conditions must be true. or means at least one condition must be true.",
-      keyIdea: "Multiple conditions let programs make more realistic decisions.",
+      keyIdea: "Multiple conditions make your program’s decisions more realistic.",
     },
     starterCode: {
       editorLanguage: "python",
@@ -2132,13 +2132,13 @@ else:
     },
     success: {
       message:
-        "Nice! You used multiple conditions to create a more realistic decision.",
+        "Nice! You combined conditions to make a more realistic decision.",
       nextLessonPrompt:
-        "Next, you’ll combine decisions into a pass-or-fail mini project.",
+        "Next, we’ll build a pass-or-fail checker mini-project.",
     },
     failure: {
       encouragement:
-        "You’re close. This lesson needs two values, if/else, and a condition using and or or.",
+        "You’re close. This needs two values, if/else, and a condition using and or or.",
       retryPrompt:
         "Change the starter values and messages, then use and or or inside the if condition.",
     },
@@ -2148,9 +2148,9 @@ else:
     language: "python",
     order: 17,
     slug: "pass-or-fail-checker",
-    title: "Pass or Fail Checker Mini Project",
+    title: "Build a Pass-or-Fail Checker",
     shortDescription:
-      "Build a small program that checks a score and prints the result.",
+      "Ask for a score, make a decision, and print the result.",
     difficulty: "beginner",
     estimatedMinutes: 12,
     xpReward: 50,
@@ -2159,12 +2159,12 @@ else:
     moduleOrder: 3,
     lessonType: "mini-project",
     learningGoal:
-      "Combine input(), int(), if/else, comparison operators, and custom messages into one decision-based mini project.",
+      "Combine input(), int(), if/else, comparisons, and custom messages.",
     realLifeWhy:
       "Decision-based programs are everywhere: grade checkers, eligibility forms, quiz results, warnings, recommendations, and approval systems.",
     concept: {
       explanation:
-        "This mini-project uses the full decision pattern: ask for input, convert the number, check a condition, and print one of two possible results.",
+        "This mini-project follows a useful pattern: ask for input, convert the number, check a condition, then print one of two results.",
       keyIdea: "A useful program can ask, calculate, decide, and respond.",
     },
     starterCode: {
@@ -2179,7 +2179,7 @@ else:
     },
     task: {
       instruction:
-        "Customize the pass-or-fail checker by changing the prompts, cutoff logic if you want, and both result messages.",
+        "Customize the checker by changing the prompts, cutoff logic if you want, and both result messages.",
       successCriteria: [
         "The code asks for a name using input()",
         "The code asks for a score using input()",
@@ -2194,11 +2194,11 @@ else:
     hints: [
       {
         id: "hint-1",
-        text: "Keep int(score) so Python can compare the score as a number.",
+        text: "Keep int(score) so Python compares score as a number.",
       },
       {
         id: "hint-2",
-        text: "The if block should print the passing result. The else block should print the other result.",
+        text: "The if block prints the passing result. The else block prints the other result.",
       },
       {
         id: "hint-3",
@@ -2278,15 +2278,643 @@ else:
     },
     success: {
       message:
-        "Module 3 complete! You can now make Python programs choose between outcomes using if, else, comparisons, and multiple conditions.",
+        "Module 3 complete! Your programs can now make decisions using if, else, comparisons, and multiple conditions.",
       nextLessonPrompt:
-        "Next, we’ll start Module 4 and teach your programs how to repeat actions with loops.",
+        "Next, we’ll make Python repeat actions with loops.",
     },
     failure: {
       encouragement:
-        "You’re close. This mini-project needs name input, score input, int(score), if/else, and custom result messages.",
+        "You’re close. This project needs name input, score input, int(score), if/else, and custom messages.",
       retryPrompt:
-        "Change both prompts and messages, but keep name, score, int(score), if, else, and the score comparison working.",
+        "Keep input(), int(score), if, else, and messages that use name. Then customize the prompts and results.",
+    },
+  },
+  {
+    id: "python-018",
+    language: "python",
+    order: 18,
+    slug: "repeat-with-while-loops",
+    title: "Repeat Until It Stops",
+    shortDescription: "Use a while loop to repeat while a condition is true.",
+    difficulty: "beginner",
+    estimatedMinutes: 9,
+    xpReward: 35,
+    moduleId: "python-module-4",
+    moduleTitle: "Loops",
+    moduleOrder: 4,
+    lessonType: "concept",
+    learningGoal:
+      "Repeat code with a while loop and stop it safely.",
+    realLifeWhy:
+      "Programs often need to repeat actions: checking attempts, counting steps, retrying tasks, or waiting until something changes.",
+    concept: {
+      explanation:
+        "A while loop keeps running while its condition is true. Something inside the loop should eventually change the condition so it does not run forever.",
+      keyIdea:
+        "A while loop repeats until the condition becomes false.",
+    },
+    starterCode: {
+      editorLanguage: "python",
+      code: `count = 1
+
+while count <= 3:
+    print(count)
+    count = count + 1`,
+    },
+    task: {
+      instruction:
+        "Change the loop so it counts to a different number and prints each count.",
+      successCriteria: [
+        "The code creates a variable named count",
+        "The code uses a while loop",
+        "The while condition uses count",
+        "The code prints count inside the loop",
+        "The code updates count inside the loop",
+        "The loop limit is different from 3",
+      ],
+    },
+    hints: [
+      {
+        id: "hint-1",
+        text: "Keep count = 1 at the start.",
+      },
+      {
+        id: "hint-2",
+        text: "Change the number in the while condition.",
+      },
+      {
+        id: "hint-3",
+        text: "Keep count = count + 1 so the loop eventually stops.",
+      },
+    ],
+    check: {
+      mode: "static-rules",
+      rules: [
+        {
+          id: "has-count",
+          description: "The code should create a count variable.",
+          requiredIncludes: ["count", "="],
+        },
+        {
+          id: "uses-while",
+          description: "The code should use a while loop.",
+          requiredIncludes: ["while "],
+        },
+        {
+          id: "uses-condition",
+          description: "The while loop should compare count.",
+          requiredIncludes: ["count", "<="],
+        },
+        {
+          id: "prints-count",
+          description: "The code should print count.",
+          requiredIncludes: ["print(count)"],
+        },
+        {
+          id: "updates-count",
+          description: "The code should update count.",
+          requiredIncludes: ["count = count + 1"],
+        },
+        {
+          id: "changed-limit",
+          description: "The starter loop limit should be changed.",
+          forbiddenIncludes: ["count <= 3"],
+        },
+      ],
+      aiPromptTemplate: defaultAiPromptTemplate,
+    },
+    success: {
+      message:
+        "Nice! You made Python repeat code and stop safely by updating count.",
+      nextLessonPrompt:
+        "Next, we’ll count with a for loop using less setup.",
+    },
+    failure: {
+      encouragement:
+        "You’re close. This needs count, while, print(count), and count = count + 1.",
+      retryPrompt:
+        "Change the loop limit, but keep the count variable, while loop, print(count), and count update.",
+    },
+  },
+  {
+    id: "python-019",
+    language: "python",
+    order: 19,
+    slug: "count-with-for-loops",
+    title: "Count with a For Loop",
+    shortDescription: "Use for and range() to repeat a set number of times.",
+    difficulty: "beginner",
+    estimatedMinutes: 9,
+    xpReward: 35,
+    moduleId: "python-module-4",
+    moduleTitle: "Loops",
+    moduleOrder: 4,
+    lessonType: "concept",
+    learningGoal:
+      "Use a for loop with range() to count through numbers.",
+    realLifeWhy:
+      "Many programs repeat a task a known number of times: showing quiz questions, printing tickets, counting levels, or generating items.",
+    concept: {
+      explanation:
+        "A for loop repeats once for each item in a sequence. range() creates a sequence of numbers for the loop to use.",
+      keyIdea:
+        "Use for with range() when you know how many times to repeat.",
+    },
+    starterCode: {
+      editorLanguage: "python",
+      code: `for number in range(1, 4):
+    print(number)`,
+    },
+    task: {
+      instruction:
+        "Change the range so Python counts through a different set of numbers.",
+      successCriteria: [
+        "The code uses a for loop",
+        "The code uses range()",
+        "The loop variable is named number",
+        "The code prints number inside the loop",
+        "The range is different from range(1, 4)",
+      ],
+    },
+    hints: [
+      {
+        id: "hint-1",
+        text: "range(1, 4) gives 1, 2, and 3. The stop number is not included.",
+      },
+      {
+        id: "hint-2",
+        text: "Try range(1, 6) to print 1 through 5.",
+      },
+      {
+        id: "hint-3",
+        text: "Keep print(number) indented under the for loop.",
+      },
+    ],
+    check: {
+      mode: "static-rules",
+      rules: [
+        {
+          id: "uses-for",
+          description: "The code should use a for loop.",
+          requiredIncludes: ["for "],
+        },
+        {
+          id: "uses-number",
+          description: "The loop variable should be number.",
+          requiredIncludes: ["number"],
+        },
+        {
+          id: "uses-range",
+          description: "The code should use range().",
+          requiredIncludes: ["range("],
+        },
+        {
+          id: "prints-number",
+          description: "The code should print number.",
+          requiredIncludes: ["print(number)"],
+        },
+        {
+          id: "changed-range",
+          description: "The starter range should be changed.",
+          forbiddenIncludes: ["range(1, 4)"],
+        },
+      ],
+      aiPromptTemplate: defaultAiPromptTemplate,
+    },
+    success: {
+      message:
+        "Great! You used for and range() to count through numbers.",
+      nextLessonPrompt:
+        "Next, we’ll loop through text one character at a time.",
+    },
+    failure: {
+      encouragement:
+        "You’re close. This needs for, number, range(), and print(number).",
+      retryPrompt:
+        "Change the range numbers, but keep the for loop and print(number).",
+    },
+  },
+  {
+    id: "python-020",
+    language: "python",
+    order: 20,
+    slug: "loop-through-text",
+    title: "Spell Out a Word",
+    shortDescription: "Loop through text and print one character at a time.",
+    difficulty: "beginner",
+    estimatedMinutes: 9,
+    xpReward: 35,
+    moduleId: "python-module-4",
+    moduleTitle: "Loops",
+    moduleOrder: 4,
+    lessonType: "practice",
+    learningGoal:
+      "Use a for loop to go through each character in a string.",
+    realLifeWhy:
+      "Text tools often inspect words piece by piece: checking passwords, scanning names, counting letters, or formatting messages.",
+    concept: {
+      explanation:
+        "A string is a sequence of characters. A for loop can visit each character one by one.",
+      keyIdea:
+        "A for loop can loop through text, not just numbers.",
+    },
+    starterCode: {
+      editorLanguage: "python",
+      code: `word = "code"
+
+for letter in word:
+    print(letter)`,
+    },
+    task: {
+      instruction:
+        "Change the word and print each letter using a for loop.",
+      successCriteria: [
+        "The code creates a variable named word",
+        "The word value is changed from code",
+        "The code uses a for loop",
+        "The loop variable is named letter",
+        "The code prints letter inside the loop",
+      ],
+    },
+    hints: [
+      {
+        id: "hint-1",
+        text: "Change only the text inside the quotation marks first.",
+      },
+      {
+        id: "hint-2",
+        text: "Keep for letter in word: so Python loops through the text.",
+      },
+      {
+        id: "hint-3",
+        text: "Keep print(letter) indented under the loop.",
+      },
+    ],
+    check: {
+      mode: "static-rules",
+      rules: [
+        {
+          id: "has-word",
+          description: "The code should create a word variable.",
+          requiredIncludes: ["word", "="],
+        },
+        {
+          id: "uses-for-letter",
+          description: "The code should loop through letters.",
+          requiredIncludes: ["for letter in word:"],
+        },
+        {
+          id: "prints-letter",
+          description: "The code should print letter.",
+          requiredIncludes: ["print(letter)"],
+        },
+        {
+          id: "changed-word",
+          description: "The starter word should be changed.",
+          forbiddenIncludes: ['word = "code"', "word = 'code'"],
+        },
+      ],
+      aiPromptTemplate: defaultAiPromptTemplate,
+    },
+    success: {
+      message:
+        "Nice! Python spelled out the word one character at a time.",
+      nextLessonPrompt:
+        "Next, we’ll control exactly where counting starts and stops.",
+    },
+    failure: {
+      encouragement:
+        "You’re close. This needs word, for letter in word, and print(letter).",
+      retryPrompt:
+        "Change the word value, then keep the loop and print(letter).",
+    },
+  },
+  {
+    id: "python-021",
+    language: "python",
+    order: 21,
+    slug: "loop-through-a-range",
+    title: "Choose Where Counting Starts and Stops",
+    shortDescription: "Control the start and stop numbers in range().",
+    difficulty: "beginner",
+    estimatedMinutes: 10,
+    xpReward: 40,
+    moduleId: "python-module-4",
+    moduleTitle: "Loops",
+    moduleOrder: 4,
+    lessonType: "practice",
+    learningGoal:
+      "Use range(start, stop) to control a for loop’s numbers.",
+    realLifeWhy:
+      "Real programs often count from a specific starting point: page numbers, item IDs, levels, seats, or score ranges.",
+    concept: {
+      explanation:
+        "range(start, stop) starts at the first number and stops before the second number. The stop number is not included.",
+      keyIdea:
+        "The stop number in range() is not included.",
+    },
+    starterCode: {
+      editorLanguage: "python",
+      code: `for number in range(2, 6):
+    print(number)`,
+    },
+    task: {
+      instruction:
+        "Change the start and stop numbers so Python prints a different range.",
+      successCriteria: [
+        "The code uses a for loop",
+        "The code uses range() with two numbers",
+        "The loop variable is named number",
+        "The code prints number",
+        "The range is different from range(2, 6)",
+      ],
+    },
+    hints: [
+      {
+        id: "hint-1",
+        text: "The first number is where counting starts.",
+      },
+      {
+        id: "hint-2",
+        text: "The second number is where counting stops, but it is not included.",
+      },
+      {
+        id: "hint-3",
+        text: "Try range(5, 10) to print 5 through 9.",
+      },
+    ],
+    check: {
+      mode: "static-rules",
+      rules: [
+        {
+          id: "uses-for",
+          description: "The code should use a for loop.",
+          requiredIncludes: ["for "],
+        },
+        {
+          id: "uses-number",
+          description: "The loop variable should be number.",
+          requiredIncludes: ["number"],
+        },
+        {
+          id: "uses-range",
+          description: "The code should use range().",
+          requiredIncludes: ["range("],
+        },
+        {
+          id: "prints-number",
+          description: "The code should print number.",
+          requiredIncludes: ["print(number)"],
+        },
+        {
+          id: "changed-range",
+          description: "The starter range should be changed.",
+          forbiddenIncludes: ["range(2, 6)"],
+        },
+      ],
+      aiPromptTemplate: defaultAiPromptTemplate,
+    },
+    success: {
+      message:
+        "Great! You controlled where the loop starts and where it stops.",
+      nextLessonPrompt:
+        "Next, we’ll use loops to build a tiny countdown.",
+    },
+    failure: {
+      encouragement:
+        "You’re close. This needs a for loop, range(), and print(number).",
+      retryPrompt:
+        "Change the two numbers inside range(), then keep print(number).",
+    },
+  },
+  {
+    id: "python-022",
+    language: "python",
+    order: 22,
+    slug: "countdown-timer-mini-project",
+    title: "Build a Countdown",
+    shortDescription: "Count backward with range() and print a final message.",
+    difficulty: "beginner",
+    estimatedMinutes: 12,
+    xpReward: 45,
+    moduleId: "python-module-4",
+    moduleTitle: "Loops",
+    moduleOrder: 4,
+    lessonType: "mini-project",
+    learningGoal:
+      "Use a for loop with a negative range step to count backward.",
+    realLifeWhy:
+      "Countdowns show up in games, workouts, launches, timers, quizzes, and reminders. A loop is the simplest way to make one.",
+    concept: {
+      explanation:
+        "range() can count backward if the step is negative. For example, range(5, 0, -1) gives 5, 4, 3, 2, 1.",
+      keyIdea:
+        "A negative step makes range() count backward.",
+    },
+    starterCode: {
+      editorLanguage: "python",
+      code: `for number in range(5, 0, -1):
+    print(number)
+
+print("Go!")`,
+    },
+    task: {
+      instruction:
+        "Customize the countdown by changing the starting number and final message.",
+      successCriteria: [
+        "The code uses a for loop",
+        "The code uses range()",
+        "The range uses a negative step",
+        "The code prints number inside the loop",
+        "The code prints a final message after the loop",
+        "The starting countdown number is different from 5",
+        "The final message is different from Go!",
+      ],
+    },
+    hints: [
+      {
+        id: "hint-1",
+        text: "range(5, 0, -1) counts from 5 down to 1.",
+      },
+      {
+        id: "hint-2",
+        text: "Change the first number to start from a different countdown number.",
+      },
+      {
+        id: "hint-3",
+        text: "Keep the final print() outside the loop so it prints once.",
+      },
+    ],
+    check: {
+      mode: "static-rules",
+      rules: [
+        {
+          id: "uses-for",
+          description: "The code should use a for loop.",
+          requiredIncludes: ["for "],
+        },
+        {
+          id: "uses-range",
+          description: "The code should use range().",
+          requiredIncludes: ["range("],
+        },
+        {
+          id: "uses-negative-step",
+          description: "The range should count backward.",
+          requiredIncludes: ["-1"],
+        },
+        {
+          id: "prints-number",
+          description: "The code should print number inside the loop.",
+          requiredIncludes: ["print(number)"],
+        },
+        {
+          id: "uses-print",
+          description: "The code should print a final message.",
+          requiredIncludes: ["print("],
+        },
+        {
+          id: "changed-start",
+          description: "The starter countdown range should be changed.",
+          forbiddenIncludes: ["range(5, 0, -1)"],
+        },
+        {
+          id: "changed-final-message",
+          description: "The starter final message should be changed.",
+          forbiddenIncludes: ['print("Go!")', "print('Go!')"],
+        },
+      ],
+      aiPromptTemplate: defaultAiPromptTemplate,
+    },
+    success: {
+      message:
+        "Nice! You built a countdown with a loop and a final message.",
+      nextLessonPrompt:
+        "Next, we’ll let user input control how many times a loop repeats.",
+    },
+    failure: {
+      encouragement:
+        "You’re close. This project needs a backward range, print(number), and a changed final message.",
+      retryPrompt:
+        "Change the countdown start number and final message, but keep the negative step and print(number).",
+    },
+  },
+  {
+    id: "python-023",
+    language: "python",
+    order: 23,
+    slug: "number-repeater-mini-project",
+    title: "Build a User-Controlled Repeater",
+    shortDescription: "Ask for a number and repeat a message that many times.",
+    difficulty: "beginner",
+    estimatedMinutes: 13,
+    xpReward: 50,
+    moduleId: "python-module-4",
+    moduleTitle: "Loops",
+    moduleOrder: 4,
+    lessonType: "mini-project",
+    learningGoal:
+      "Combine input(), int(), range(), for loops, and custom output.",
+    realLifeWhy:
+      "User-controlled repetition appears in real tools: generating tickets, showing reminders, printing labels, repeating quiz attempts, or creating multiple items.",
+    concept: {
+      explanation:
+        "Ask the user how many times to repeat, convert that input with int(), then use it inside range().",
+      keyIdea:
+        "User input can control how many times a loop repeats.",
+    },
+    starterCode: {
+      editorLanguage: "python",
+      code: `times = input("How many times should I repeat? ")
+
+for number in range(int(times)):
+    print("Practice Python!")`,
+    },
+    task: {
+      instruction:
+        "Customize the repeater by changing the prompt and repeated message.",
+      successCriteria: [
+        "The code asks for input",
+        "The answer is stored in a variable named times",
+        "The code uses int(times)",
+        "The code uses a for loop",
+        "The code uses range(int(times))",
+        "The code prints a repeated message inside the loop",
+        "The starter prompt is changed",
+        "The repeated message is changed",
+      ],
+    },
+    hints: [
+      {
+        id: "hint-1",
+        text: "Keep times = input(...) so the user controls the repeat count.",
+      },
+      {
+        id: "hint-2",
+        text: "Use range(int(times)) so Python repeats based on the typed number.",
+      },
+      {
+        id: "hint-3",
+        text: "Change the message inside print() to something custom.",
+      },
+    ],
+    check: {
+      mode: "static-rules",
+      rules: [
+        {
+          id: "uses-input",
+          description: "The code should ask for input.",
+          requiredIncludes: ["input("],
+        },
+        {
+          id: "stores-times",
+          description: "The input should be stored in times.",
+          requiredIncludes: ["times", "="],
+        },
+        {
+          id: "uses-int-times",
+          description: "The code should convert times using int(times).",
+          requiredIncludes: ["int(times)"],
+        },
+        {
+          id: "uses-for",
+          description: "The code should use a for loop.",
+          requiredIncludes: ["for "],
+        },
+        {
+          id: "uses-range",
+          description: "The code should use range().",
+          requiredIncludes: ["range("],
+        },
+        {
+          id: "uses-print",
+          description: "The code should print inside the loop.",
+          requiredIncludes: ["print("],
+        },
+        {
+          id: "changed-prompt",
+          description: "The starter prompt should be changed.",
+          forbiddenIncludes: ["How many times should I repeat?"],
+        },
+        {
+          id: "changed-message",
+          description: "The starter repeated message should be changed.",
+          forbiddenIncludes: ["Practice Python!"],
+        },
+      ],
+      aiPromptTemplate: defaultAiPromptTemplate,
+    },
+    success: {
+      message:
+        "Module 4 complete! You can now repeat actions using while loops, for loops, range(), text loops, countdowns, and user-controlled loops.",
+      nextLessonPrompt:
+        "Next, we’ll start Module 5 and learn how to store many values using lists.",
+    },
+    failure: {
+      encouragement:
+        "You’re close. This project needs input, int(times), range(), a for loop, and a changed repeated message.",
+      retryPrompt:
+        "Keep times, int(times), range(), and the for loop, then change the prompt and print message.",
     },
   },
   {
